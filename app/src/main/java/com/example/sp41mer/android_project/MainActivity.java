@@ -3,6 +3,7 @@ package com.example.sp41mer.android_project;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -82,12 +83,13 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            Log.d("Нажатие в навигаторе", "Нажал на камеру");
         } else if (id == R.id.nav_gallery) {
-
+            Log.d("Нажатие в навигаторе", "Нажал на копилку");
         } else if (id == R.id.nav_slideshow) {
-
+            Log.d("Нажатие в навигаторе", "Нажал на статистику");
         } else if (id == R.id.nav_manage) {
-
+            Log.d("Нажатие в навигаторе", "Нажал на настройки");
         }
 //        else if (id == R.id.nav_share) {
 //
