@@ -4,6 +4,11 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="current_no_money">У вас пока 0 рублей. Ха!</string>
+
+    <string name="menu_big_header">Умная копилка</string>
+    <string name="menu_small_header">Забудь про устный счёт</string>
+
     <string name="menu_new_photo">Новый снимок</string>
     <string name="menu_current">Копилка</string>
     <string name="menu_stats">Статистика</string>
