@@ -29,12 +29,13 @@
                     >
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="70dp"
+                        android:layout_height="90dp"
                         android:id="@+id/person_photo"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginRight="16dp"
+                        android:layout_marginRight="25dp"
+                        android:src = "@mipmap/coins"
                         />
 
                     <TextView
@@ -44,7 +45,7 @@
                         android:layout_toRightOf="@+id/person_photo"
                         android:layout_alignParentTop="true"
                         android:textSize="30sp"
-                        android:text = "ЛОЛ"
+                        android:text = "67 рублей"
                         />
 
                     <TextView
@@ -53,7 +54,7 @@
                         android:id="@+id/person_age"
                         android:layout_toRightOf="@+id/person_photo"
                         android:layout_below="@+id/person_name"
-                        android:text = "КЕК"
+                        android:text = "22.04.2016"
                         />
 
                 </RelativeLayout>
