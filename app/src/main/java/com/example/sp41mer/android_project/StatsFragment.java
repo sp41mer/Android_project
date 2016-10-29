@@ -24,15 +24,6 @@ public class StatsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_stats, container, false);
-
-        final Button mainButton = (Button) rootView.findViewById(R.id.stats_button);
-        mainButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                mainButton.setBackgroundColor(getContext().getResources().getColor(R.color.colorAccent));
-            }
-        });
         // Inflate the layout for this fragment
         return rootView;
     }

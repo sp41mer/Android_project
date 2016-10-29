@@ -4,16 +4,65 @@
     android:layout_height="match_parent"
     tools:context="com.example.sp41mer.android_project.StatsFragment">
 
-    <Button
-        android:layout_width="wrap_content"
+    <ScrollView
         android:layout_height="wrap_content"
-        android:text="STATS"
-        android:padding="8dp"
-        android:textColor="#fff"
-        android:background="@color/colorPrimary"
-        android:textSize="28sp"
-        android:id="@+id/stats_button"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_width="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text = "ЛОЛ КЕК1"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text = "ЛОЛ КЕК2"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text = "ЛОЛ КЕК3"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text = "ЛОЛ КЕК4"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text = "ЛОЛ КЕК5"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text = "ЛОЛ КЕК6"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text = "ЛОЛ КЕК7"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text = "ЛОЛ КЕК8"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text = "ЛОЛ КЕК9"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text = "ЛОЛ КЕК10"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text = "ЛОЛ КЕК11"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text = "ЛОЛ КЕК12"/>
+        </LinearLayout>
+
+        </ScrollView>
 
 </RelativeLayout>

@@ -4,16 +4,12 @@
     android:layout_height="match_parent"
     tools:context="com.example.sp41mer.android_project.FirstFragment">
 
-    <Button
-        android:layout_width="wrap_content"
+    <TextView
         android:layout_height="wrap_content"
-        android:text="MAIN"
-        android:padding="8dp"
-        android:textColor="#fff"
-        android:background="@color/colorPrimary"
-        android:textSize="28sp"
-        android:id="@+id/main_button"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_width="wrap_content"
+        android:padding="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal = "true"
+        android:text = "Пока 0 рублей"/>
 
 </RelativeLayout>
