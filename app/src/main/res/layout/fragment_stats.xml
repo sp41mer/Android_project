@@ -41,7 +41,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/person_name"
+                        android:id="@+id/value"
                         android:layout_toRightOf="@+id/person_photo"
                         android:layout_alignParentTop="true"
                         android:textSize="30sp"
@@ -51,10 +51,19 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/person_age"
+                        android:id="@+id/date"
                         android:layout_toRightOf="@+id/person_photo"
-                        android:layout_below="@+id/person_name"
+                        android:layout_below="@+id/value"
                         android:text = "22.04.2016"
+                        />
+                    <Button
+                        android:id="@+id/more_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerVertical="true"
+                        android:text=". . ."
                         />
 
                 </RelativeLayout>
