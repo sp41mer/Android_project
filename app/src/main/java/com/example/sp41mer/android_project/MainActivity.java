@@ -1,5 +1,6 @@
 package com.example.sp41mer.android_project;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,11 +18,23 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    NavigationView navigationView = null;
+    Toolbar toolbar = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        //Вот сюда запихиваем фрагмент чтоб он с самого начала фигачил
+        FirstFragment fragment = new FirstFragment();
+        //Не уверен что так можно, но индус сказал делать так
+        android.support.v4.app.FragmentTransaction fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -34,12 +47,14 @@ public class MainActivity extends AppCompatActivity
         });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -86,8 +101,20 @@ public class MainActivity extends AppCompatActivity
             Log.d("Нажатие в навигаторе", "Нажал на камеру");
         } else if (id == R.id.nav_gallery) {
             Log.d("Нажатие в навигаторе", "Нажал на копилку");
+            FirstFragment fragment = new FirstFragment();
+            //Не уверен что так можно, но индус сказал делать так
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_slideshow) {
             Log.d("Нажатие в навигаторе", "Нажал на статистику");
+            StatsFragment fragment = new StatsFragment();
+            //Не уверен что так можно, но индус сказал делать так
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_manage) {
             Log.d("Нажатие в навигаторе", "Нажал на настройки");
         }
