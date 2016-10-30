@@ -1,6 +1,7 @@
 package com.example.sp41mer.android_project;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -135,17 +136,23 @@ public class StatsFragment extends Fragment {
 
     }
 
-    private static class ItemViewHolder extends RecyclerView.ViewHolder {
+    private class ItemViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView text1;
         private final TextView text2;
         private final ImageView picture;
 
-        public ItemViewHolder(View itemView) {
+        public ItemViewHolder(final View itemView) {
             super(itemView);
             this.text1 = (TextView) itemView.findViewById(R.id.card_text_1);
             this.text2 = (TextView) itemView.findViewById(R.id.card_text_2);
             this.picture = (ImageView) itemView.findViewById(R.id.card_image);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    Intent intent = new Intent(itemView.getContext(), DetailPhotoActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
 
         public void bind(Item item) {
