@@ -2,27 +2,20 @@ package com.example.sp41mer.android_project;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.sql.DataSource;
-
-import static android.support.v7.widget.LinearLayoutManager.*;
 
 
 /**
@@ -70,19 +63,6 @@ public class StatsFragment extends Fragment {
 
         statsRecyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
 
-//        Button button= (Button) rootView.findViewById(R.id.more_info);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                OnePhotoFragment fragment = new OnePhotoFragment();
-//                Не уверен что так можно, но индус сказал делать так
-//                android.support.v4.app.FragmentTransaction fragmentTransaction =
-//                        getFragmentManager().beginTransaction();
-//                fragmentTransaction.replace(R.id.fragment_container, fragment);
-//                fragmentTransaction.commit();
-//            }
-//
-//        });
-
         // Inflate the layout for this fragment
         return rootView;
 
@@ -121,10 +101,10 @@ public class StatsFragment extends Fragment {
         public Item getItem(int position) {
             return items.get(position);
         }
-
+        @Nullable
         public void addItem(Item item) {
             items.add(item);
-//            statsRecyclerView.getAdapter().notifyItemInserted(items.size() - 1);
+            statsRecyclerView.getAdapter().notifyItemInserted(items.size() - 1);
         }
 
         public void removeFirst() {
