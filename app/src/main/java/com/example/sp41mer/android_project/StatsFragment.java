@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -44,51 +45,48 @@ public class StatsFragment extends Fragment {
         final DataSource dataSource = new DataSource();
         statsRecyclerView = (RecyclerView) rootView.findViewById(R.id.list_photos);
 
-        statsLayoutManager = new LinearLayoutManager(container.getContext(), LinearLayoutManager.HORIZONTAL, false);
-        statsRecyclerView.setLayoutManager(statsLayoutManager);
-
         for (int i=0; i<5; i++) {
-            final CardView card = new CardView(statsRecyclerView.getContext());
-            RecyclerView.LayoutParams params = new RecyclerView.LayoutParams(
-                    RecyclerView.LayoutParams.WRAP_CONTENT,
-                    RecyclerView.LayoutParams.WRAP_CONTENT
-            );
-            card.setLayoutParams(params);
 
-            // Set CardView corner radius
-            card.setRadius(9);
-
-            // Set cardView content padding
-            card.setContentPadding(15, 15, 15, 15);
-
-            // Set a background color for CardView
-            card.setCardBackgroundColor(Color.parseColor("#FFC6D6C3"));
-
-            // Set the CardView maximum elevation
-            card.setMaxCardElevation(15);
-
-            // Set CardView elevation
-            card.setCardElevation(9);
-
-            // Initialize a new TextView to put in CardView
-            TextView tv = new TextView(statsRecyclerView.getContext());
-            tv.setLayoutParams(params);
-            tv.setText("CardView\nProgrammatically");
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
-            tv.setTextColor(Color.RED);
-
-            // Put the TextView in CardView
-            card.addView(tv);
-
-            statsRecyclerView.addView(card);
+            dataSource.addItem(new Item("a"+i, "a"+i, "a"+i));
+//            final CardView card = new CardView(statsRecyclerView.getContext());
+//            final RecyclerView.LayoutParams params = new RecyclerView.LayoutParams(
+//                    RecyclerView.LayoutParams.WRAP_CONTENT,
+//                    RecyclerView.LayoutParams.WRAP_CONTENT
+//            );
+//            card.setLayoutParams(params);
+//
+//            // Set CardView corner radius
+//            card.setRadius(9);
+//
+//            // Set cardView content padding
+//            card.setContentPadding(15, 15, 15, 15);
+//
+//            // Set a background color for CardView
+//            card.setCardBackgroundColor(Color.parseColor("#FFC6D6C3"));
+//
+//            // Set the CardView maximum elevation
+//            card.setMaxCardElevation(15);
+//
+//            // Set CardView elevation
+//            card.setCardElevation(9);
+//
+//            // Initialize a new TextView to put in CardView
+//            TextView tv = new TextView(statsRecyclerView.getContext());
+//            tv.setLayoutParams(params);
+//            tv.setText("CardView\nProgrammatically");
+//            tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+//            tv.setTextColor(Color.RED);
+//
+//            // Put the TextView in CardView
+//            card.addView(tv);
+//
+//            statsRecyclerView.addView(card);
 
             statsRecyclerView.setAdapter(new RecyclerView.Adapter() {
                 @Override
-                public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    View itemView = LayoutInflater.from(parent.getContext())
-                            .inflate(R.layout.album_card, parent, false);
-
-                    return new ItemViewHolder(itemView);
+                public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                    View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.album_card, parent, false);
+                    return new ItemViewHolder(v);
                 }
 
                 @Override
@@ -103,6 +101,8 @@ public class StatsFragment extends Fragment {
                 }
             });
         }
+
+        statsRecyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
 
 //        Button button= (Button) rootView.findViewById(R.id.more_info);
 //        button.setOnClickListener(new View.OnClickListener() {
@@ -127,10 +127,12 @@ public class StatsFragment extends Fragment {
 
         private final String text1;
         private final String text2;
+        private final String picture;
 
-        Item(String text1, String text2) {
-            this.text1 = text1;
-            this.text2 = text2;
+        Item(String cost, String date, String picturePath) {
+            this.text1 = cost;
+            this.text2 = date;
+            this.picture = picturePath;
         }
 
         public String getText1() {
@@ -172,11 +174,13 @@ public class StatsFragment extends Fragment {
 
         private final TextView text1;
         private final TextView text2;
+        private final ImageView picture;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            this.text1 = (TextView) itemView.findViewById(R.id.text2);
-            this.text2 = (TextView) itemView.findViewById(R.id.text2);
+            this.text1 = (TextView) itemView.findViewById(R.id.card_text_1);
+            this.text2 = (TextView) itemView.findViewById(R.id.card_text_2);
+            this.picture = (ImageView) itemView.findViewById(R.id.card_image);
         }
 
         public void bind(Item item) {
