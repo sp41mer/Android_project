@@ -2,11 +2,20 @@ package com.example.sp41mer.android_project;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 public class DetailPhotoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Получаем параметры карточки text1 и text2
+        String text1 = getIntent().getExtras().getString("text1");
+        String text2 = getIntent().getExtras().getString("text2");
+
+        //Срем в логи
+        Log.d("First text: ", text1);
+        Log.d("Second text: ", text2);
         setContentView(R.layout.fragment_one_photo);
     }
 

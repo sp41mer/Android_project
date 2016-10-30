@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -129,7 +130,12 @@ public class StatsFragment extends Fragment {
             this.picture = (ImageView) itemView.findViewById(R.id.card_image);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
+
                     Intent intent = new Intent(itemView.getContext(), DetailPhotoActivity.class);
+                    //Вот тут надо value of text поменять на значение параметров text1 и text2
+                    //Но я не нашел как это сделать
+                    intent.putExtra("text1","value of text 1");
+                    intent.putExtra("text2","value of text 1");
                     startActivity(intent);
                 }
             });
