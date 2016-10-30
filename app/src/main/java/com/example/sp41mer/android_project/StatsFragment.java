@@ -15,6 +15,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+
 import static android.support.v7.widget.LinearLayoutManager.*;
 
 
@@ -36,6 +41,7 @@ public class StatsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_stats, container, false);
 
+        final DataSource dataSource = new DataSource();
         statsRecyclerView = (RecyclerView) rootView.findViewById(R.id.list_photos);
 
         statsLayoutManager = new LinearLayoutManager(container.getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -78,21 +84,22 @@ public class StatsFragment extends Fragment {
 
             statsRecyclerView.setAdapter(new RecyclerView.Adapter() {
                 @Override
-                public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                     View itemView = LayoutInflater.from(parent.getContext())
                             .inflate(R.layout.album_card, parent, false);
 
-                    return new ViewHolder(itemView);
+                    return new ItemViewHolder(itemView);
                 }
 
                 @Override
                 public void onBindViewHolder(ViewHolder holder, int position) {
-
+                    Item item = dataSource.getItem(position);
+                    ((ItemViewHolder) holder).bind(item);
                 }
 
                 @Override
                 public int getItemCount() {
-                    return 10;
+                    return dataSource.getCount();
                 }
             });
         }
@@ -113,6 +120,69 @@ public class StatsFragment extends Fragment {
         // Inflate the layout for this fragment
         return rootView;
 
+
+    }
+
+    private static class Item {
+
+        private final String text1;
+        private final String text2;
+
+        Item(String text1, String text2) {
+            this.text1 = text1;
+            this.text2 = text2;
+        }
+
+        public String getText1() {
+            return text1;
+        }
+
+        public String getText2() {
+            return text2;
+        }
+    }
+
+    private class DataSource {
+
+        private final List<Item> items = new ArrayList<>();
+
+        public int getCount() {
+            return items.size();
+        }
+
+        public Item getItem(int position) {
+            return items.get(position);
+        }
+
+        public void addItem(Item item) {
+            items.add(item);
+            statsRecyclerView.getAdapter().notifyItemInserted(items.size() - 1);
+        }
+
+        public void removeFirst() {
+            if (!items.isEmpty()) {
+                items.remove(0);
+                statsRecyclerView.getAdapter().notifyItemRemoved(0);
+            }
+        }
+
+    }
+
+    private static class ItemViewHolder extends RecyclerView.ViewHolder {
+
+        private final TextView text1;
+        private final TextView text2;
+
+        public ItemViewHolder(View itemView) {
+            super(itemView);
+            this.text1 = (TextView) itemView.findViewById(R.id.text2);
+            this.text2 = (TextView) itemView.findViewById(R.id.text2);
+        }
+
+        public void bind(Item item) {
+            text1.setText(item.getText1());
+            text2.setText(item.getText2());
+        }
 
     }
 
