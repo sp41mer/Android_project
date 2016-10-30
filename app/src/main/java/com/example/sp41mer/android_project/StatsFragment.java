@@ -30,7 +30,6 @@ import static android.support.v7.widget.LinearLayoutManager.*;
 public class StatsFragment extends Fragment {
 
     private RecyclerView statsRecyclerView;
-    private RecyclerView.LayoutManager statsLayoutManager;
 
     public StatsFragment() {
         // Required empty public constructor
@@ -44,62 +43,28 @@ public class StatsFragment extends Fragment {
 
         final DataSource dataSource = new DataSource();
         statsRecyclerView = (RecyclerView) rootView.findViewById(R.id.list_photos);
+        statsRecyclerView.setAdapter(new RecyclerView.Adapter() {
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.album_card, parent, false);
+                return new ItemViewHolder(v);
+            }
+
+            @Override
+            public void onBindViewHolder(ViewHolder holder, int position) {
+                Item item = dataSource.getItem(position);
+                ((ItemViewHolder) holder).bind(item);
+            }
+
+            @Override
+            public int getItemCount() {
+                return dataSource.getCount();
+            }
+        });
 
         for (int i=0; i<5; i++) {
 
             dataSource.addItem(new Item("a"+i, "a"+i, "a"+i));
-//            final CardView card = new CardView(statsRecyclerView.getContext());
-//            final RecyclerView.LayoutParams params = new RecyclerView.LayoutParams(
-//                    RecyclerView.LayoutParams.WRAP_CONTENT,
-//                    RecyclerView.LayoutParams.WRAP_CONTENT
-//            );
-//            card.setLayoutParams(params);
-//
-//            // Set CardView corner radius
-//            card.setRadius(9);
-//
-//            // Set cardView content padding
-//            card.setContentPadding(15, 15, 15, 15);
-//
-//            // Set a background color for CardView
-//            card.setCardBackgroundColor(Color.parseColor("#FFC6D6C3"));
-//
-//            // Set the CardView maximum elevation
-//            card.setMaxCardElevation(15);
-//
-//            // Set CardView elevation
-//            card.setCardElevation(9);
-//
-//            // Initialize a new TextView to put in CardView
-//            TextView tv = new TextView(statsRecyclerView.getContext());
-//            tv.setLayoutParams(params);
-//            tv.setText("CardView\nProgrammatically");
-//            tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
-//            tv.setTextColor(Color.RED);
-//
-//            // Put the TextView in CardView
-//            card.addView(tv);
-//
-//            statsRecyclerView.addView(card);
-
-            statsRecyclerView.setAdapter(new RecyclerView.Adapter() {
-                @Override
-                public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.album_card, parent, false);
-                    return new ItemViewHolder(v);
-                }
-
-                @Override
-                public void onBindViewHolder(ViewHolder holder, int position) {
-                    Item item = dataSource.getItem(position);
-                    ((ItemViewHolder) holder).bind(item);
-                }
-
-                @Override
-                public int getItemCount() {
-                    return dataSource.getCount();
-                }
-            });
         }
 
         statsRecyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
@@ -158,7 +123,7 @@ public class StatsFragment extends Fragment {
 
         public void addItem(Item item) {
             items.add(item);
-            statsRecyclerView.getAdapter().notifyItemInserted(items.size() - 1);
+//            statsRecyclerView.getAdapter().notifyItemInserted(items.size() - 1);
         }
 
         public void removeFirst() {
