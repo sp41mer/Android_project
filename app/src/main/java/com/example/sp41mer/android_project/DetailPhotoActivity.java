@@ -10,8 +10,8 @@ public class DetailPhotoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //Получаем параметры карточки text1 и text2
-        String text1 = getIntent().getExtras().getString("text1");
-        String text2 = getIntent().getExtras().getString("text2");
+        String text1 = getIntent().getExtras().getCharSequence("text1").toString();
+        String text2 = getIntent().getExtras().getCharSequence("text2").toString();
 
         //Срем в логи
         Log.d("First text: ", text1);
