@@ -17,6 +17,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -24,7 +25,10 @@ public class StatsFragment extends Fragment {
 
     private RecyclerView statsRecyclerView;
 
-    public StatsFragment() {}
+    public StatsFragment() {
+        // Required empty public constructor
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,7 +56,8 @@ public class StatsFragment extends Fragment {
             }
         });
 
-        for (int i=0; i<25; i++) {
+        for (int i=0; i<5; i++) {
+
             dataSource.addItem(new Item("a"+i, "a"+i, "a"+i));
         }
 
@@ -60,6 +65,8 @@ public class StatsFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return rootView;
+
+
     }
 
     private static class Item {
@@ -74,11 +81,11 @@ public class StatsFragment extends Fragment {
             this.picture = picturePath;
         }
 
-        String getText1() {
+        public String getText1() {
             return text1;
         }
 
-        String getText2() {
+        public String getText2() {
             return text2;
         }
     }
@@ -87,20 +94,20 @@ public class StatsFragment extends Fragment {
 
         private final List<Item> items = new ArrayList<>();
 
-        int getCount() {
+        public int getCount() {
             return items.size();
         }
 
-        Item getItem(int position) {
+        public Item getItem(int position) {
             return items.get(position);
         }
-
-        void addItem(Item item) {
+        @Nullable
+        public void addItem(Item item) {
             items.add(item);
             statsRecyclerView.getAdapter().notifyItemInserted(items.size() - 1);
         }
 
-        void removeFirst() {
+        public void removeFirst() {
             if (!items.isEmpty()) {
                 items.remove(0);
                 statsRecyclerView.getAdapter().notifyItemRemoved(0);
@@ -115,23 +122,25 @@ public class StatsFragment extends Fragment {
         private final TextView text2;
         private final ImageView picture;
 
-        ItemViewHolder(final View itemView) {
+        public ItemViewHolder(final View itemView) {
             super(itemView);
             this.text1 = (TextView) itemView.findViewById(R.id.card_text_1);
             this.text2 = (TextView) itemView.findViewById(R.id.card_text_2);
             this.picture = (ImageView) itemView.findViewById(R.id.card_image);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
+
                     Intent intent = new Intent(itemView.getContext(), DetailPhotoActivity.class);
-                    intent.putExtra("text1", text1.getText());
-                    intent.putExtra("text2", text2.getText());
+                    //Вот тут надо value of text поменять на значение параметров text1 и text2
+                    //Но я не нашел как это сделать
+                    intent.putExtra("text1","value of text 1");
+                    intent.putExtra("text2","value of text 1");
                     startActivity(intent);
                 }
             });
         }
 
-        void bind(Item item) {
+        public void bind(Item item) {
             text1.setText(item.getText1());
             text2.setText(item.getText2());
         }

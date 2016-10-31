@@ -1,8 +1,11 @@
 package com.example.sp41mer.android_project;
 
+import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
@@ -14,6 +17,10 @@ public class DetailPhotoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Для того, чтоб запихнуть кнопку назад. На стаке написано только
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         AnalyticsApplication application = (AnalyticsApplication) getApplication();
         mTracker = application.getDefaultTracker();
@@ -46,6 +53,14 @@ public class DetailPhotoActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
+
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+//        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+//        startActivityForResult(myIntent, 0);
+        finish();
+        return true;
 
     }
 }
