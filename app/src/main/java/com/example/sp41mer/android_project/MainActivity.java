@@ -1,9 +1,9 @@
 package com.example.sp41mer.android_project;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -21,8 +21,8 @@ import com.google.android.gms.analytics.Tracker;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    NavigationView navigationView = null;
-    Toolbar toolbar = null;
+    NavigationView navigationView;
+    Toolbar toolbar;
     Tracker mTracker;
 
     @Override
@@ -50,8 +50,6 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
 //                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
 //                startActivity(intent);
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
 
@@ -59,7 +57,7 @@ public class MainActivity extends AppCompatActivity
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -88,7 +86,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -100,7 +97,6 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -108,42 +104,33 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-            Log.d("Нажатие в навигаторе", "Нажал на камеру");
-        } else if (id == R.id.nav_gallery) {
-            Log.d("Нажатие в навигаторе", "Нажал на копилку");
-            FirstFragment fragment = new FirstFragment();
-            //Не уверен что так можно, но индус сказал делать так
-            android.support.v4.app.FragmentTransaction fragmentTransaction =
-                    getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragment);
-            fragmentTransaction.commit();
-        } else if (id == R.id.nav_slideshow) {
-            Log.d("Нажатие в навигаторе", "Нажал на статистику");
-            StatsFragment fragment = new StatsFragment();
-            //Не уверен что так можно, но индус сказал делать так
-            android.support.v4.app.FragmentTransaction fragmentTransaction =
-                    getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragment);
-            fragmentTransaction.commit();
-        } else if (id == R.id.nav_manage) {
-            Log.d("Нажатие в навигаторе", "Нажал на настройки");
+        android.support.v4.app.FragmentTransaction fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
+        Fragment fragment = null;
+
+        switch (item.getItemId()) {
+            case R.id.nav_gallery:
+                Log.d("Нажатие в навигаторе", "Нажал на копилку");
+                fragment = new FirstFragment();
+                break;
+            case R.id.nav_slideshow:
+                Log.d("Нажатие в навигаторе", "Нажал на статистику");
+                fragment = new StatsFragment();
+                break;
+            case R.id.nav_manage:
+                fragment = new FirstFragment(); //TODO
+                Log.d("Нажатие в навигаторе", "Нажал на настройки");
+
+                break;
         }
-//        else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
+
+        ((DrawerLayout)findViewById(R.id.drawer_layout)).closeDrawer(GravityCompat.START);
         return true;
     }
 }
