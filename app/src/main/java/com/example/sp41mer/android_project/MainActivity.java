@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -27,6 +28,7 @@ import com.google.android.gms.analytics.Tracker;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -34,10 +36,12 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     static final int REQUEST_TAKE_PHOTO = 1;
+    private static final String PHOTO_PARAM = "photo";
 
     NavigationView navigationView;
     Toolbar toolbar;
     Tracker mTracker;
+    String mCurrentPhotoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,7 +161,7 @@ public class MainActivity extends AppCompatActivity
                 storageDir      /* directory */
         );
 
-        //mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        mCurrentPhotoPath = image.getAbsolutePath();
         return image;
     }
 
@@ -180,4 +184,24 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
+
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("photo", mCurrentPhotoPath);
+    }
+
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mCurrentPhotoPath = savedInstanceState.getString("photo");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
+            Intent intent = new Intent(this, PhotoService.class);
+            intent.putExtra(PHOTO_PARAM, mCurrentPhotoPath);
+            startService(intent);
+        }
+    }
+
 }
