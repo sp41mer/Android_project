@@ -2,8 +2,8 @@ package com.example.sp41mer.android_project;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
@@ -12,23 +12,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class StatsFragment extends Fragment {
 
     private RecyclerView statsRecyclerView;
 
-    public StatsFragment() {
-        // Required empty public constructor
-    }
-
+    public StatsFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,8 +42,19 @@ public class StatsFragment extends Fragment {
 
             @Override
             public void onBindViewHolder(ViewHolder holder, int position) {
+                final ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
+                itemViewHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View v) {
+                        Intent intent = new Intent(v.getContext(), DetailPhotoActivity.class);
+
+                        intent.putExtra("text1", itemViewHolder.text1.getText());
+                        intent.putExtra("text2", itemViewHolder.text2.getText());
+                        startActivity(intent);
+                    }
+                });
+
                 Item item = dataSource.getItem(position);
-                ((ItemViewHolder) holder).bind(item);
+                itemViewHolder.bind(item);
             }
 
             @Override
@@ -57,16 +64,11 @@ public class StatsFragment extends Fragment {
         });
 
         for (int i=0; i<5; i++) {
-
-            dataSource.addItem(new Item("a"+i, "a"+i, "a"+i));
+            dataSource.addItem(new Item("a"+i, DateFormat.getDateTimeInstance().format(new Date()), "a"+i));
         }
 
         statsRecyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
-
-        // Inflate the layout for this fragment
         return rootView;
-
-
     }
 
     private static class Item {
@@ -81,11 +83,11 @@ public class StatsFragment extends Fragment {
             this.picture = picturePath;
         }
 
-        public String getText1() {
+        String getText1() {
             return text1;
         }
 
-        public String getText2() {
+        String getText2() {
             return text2;
         }
     }
@@ -94,53 +96,38 @@ public class StatsFragment extends Fragment {
 
         private final List<Item> items = new ArrayList<>();
 
-        public int getCount() {
+        int getCount() {
             return items.size();
         }
 
-        public Item getItem(int position) {
+        Item getItem(int position) {
             return items.get(position);
         }
-        @Nullable
-        public void addItem(Item item) {
+
+        void addItem(Item item) {
             items.add(item);
             statsRecyclerView.getAdapter().notifyItemInserted(items.size() - 1);
-        }
-
-        public void removeFirst() {
-            if (!items.isEmpty()) {
-                items.remove(0);
-                statsRecyclerView.getAdapter().notifyItemRemoved(0);
-            }
         }
 
     }
 
     private class ItemViewHolder extends RecyclerView.ViewHolder {
 
+        LinearLayout linearLayout;
         private final TextView text1;
         private final TextView text2;
         private final ImageView picture;
 
-        public ItemViewHolder(final View itemView) {
+        ItemViewHolder(final View itemView) {
             super(itemView);
+
+            this.linearLayout = (LinearLayout) itemView.findViewById(R.id.card_layout);
             this.text1 = (TextView) itemView.findViewById(R.id.card_text_1);
             this.text2 = (TextView) itemView.findViewById(R.id.card_text_2);
             this.picture = (ImageView) itemView.findViewById(R.id.card_image);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
-
-                    Intent intent = new Intent(itemView.getContext(), DetailPhotoActivity.class);
-                    //Вот тут надо value of text поменять на значение параметров text1 и text2
-                    //Но я не нашел как это сделать
-                    intent.putExtra("text1","value of text 1");
-                    intent.putExtra("text2","value of text 1");
-                    startActivity(intent);
-                }
-            });
         }
 
-        public void bind(Item item) {
+        void bind(Item item) {
             text1.setText(item.getText1());
             text2.setText(item.getText2());
         }

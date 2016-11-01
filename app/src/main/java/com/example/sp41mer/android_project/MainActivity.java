@@ -1,7 +1,7 @@
 package com.example.sp41mer.android_project;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -10,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -19,16 +18,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -79,7 +75,7 @@ public class MainActivity extends AppCompatActivity
 
 
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.nav_gallery);
+        navigationView.setCheckedItem(R.id.nav_home);
 
         Fragment fragment = new FirstFragment();
 
@@ -110,26 +106,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         android.support.v4.app.FragmentTransaction fragmentTransaction =
@@ -137,11 +113,11 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
 
         switch (item.getItemId()) {
-            case R.id.nav_gallery:
+            case R.id.nav_home:
                 Log.d("Нажатие в навигаторе", "Нажал на копилку");
                 fragment = new FirstFragment();
                 break;
-            case R.id.nav_slideshow:
+            case R.id.nav_stat:
                 Log.d("Нажатие в навигаторе", "Нажал на статистику");
                 fragment = new StatsFragment();
                 break;
@@ -159,9 +135,10 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    @SuppressLint("SimpleDateFormat")
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
+        String imageFileName = timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
@@ -195,12 +172,12 @@ public class MainActivity extends AppCompatActivity
 
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("photo", mCurrentPhotoPath);
+        outState.putString(PHOTO_PARAM, mCurrentPhotoPath);
     }
 
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        mCurrentPhotoPath = savedInstanceState.getString("photo");
+        mCurrentPhotoPath = savedInstanceState.getString(PHOTO_PARAM);
     }
 
     @Override
