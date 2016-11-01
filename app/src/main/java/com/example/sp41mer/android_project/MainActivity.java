@@ -1,6 +1,7 @@
 package com.example.sp41mer.android_project;
 
 import android.annotation.SuppressLint;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -183,6 +184,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
+            FragmentManager fragmentManager = getFragmentManager();
+            ProgressDialogFragment newFragment = new ProgressDialogFragment();
+            newFragment.show(fragmentManager, "WaitingDialog");
+
             Intent intent = new Intent(this, PhotoService.class);
             intent.putExtra(PHOTO_PARAM, mCurrentPhotoPath);
             startService(intent);
