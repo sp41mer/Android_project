@@ -1,8 +1,11 @@
 package com.example.sp41mer.android_project;
 
 import android.annotation.SuppressLint;
-import android.app.FragmentManager;
+import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -11,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -40,11 +44,16 @@ public class MainActivity extends AppCompatActivity
 
     static final int REQUEST_TAKE_PHOTO = 1;
     private static final String PHOTO_PARAM = "photo";
+    private static final String ACTION_SERVER_RESPONSE = "server_response";
+    private static final String DIALOG_TAG = "waiting_dialog";
 
     NavigationView navigationView;
     Toolbar toolbar;
     Tracker mTracker;
     String mCurrentPhotoPath;
+
+    BroadcastReceiver broadcastReceiver;
+    ProgressDialogFragment dialogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +82,6 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-
-
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_home);
 
@@ -94,7 +101,30 @@ public class MainActivity extends AppCompatActivity
         mTracker.setScreenName("Image~Копилка");
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getAction().equals(ACTION_SERVER_RESPONSE)) {
+                    Dialog dialog = dialogFragment.getDialog();
+                    if (dialog != null) {
+                        dialog.cancel();
+                    }
+                }
+            }
+        };
+
+        IntentFilter intentFilter = new IntentFilter(ACTION_SERVER_RESPONSE);
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, intentFilter);
     }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -160,7 +190,7 @@ public class MainActivity extends AppCompatActivity
             } catch (IOException ex) {
                 // Error occurred while creating the File
             }
-            // Continue only if the File was successfully created
+
             if (photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(this,
                         "com.example.sp41mer.fileprovider",
@@ -179,14 +209,15 @@ public class MainActivity extends AppCompatActivity
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         mCurrentPhotoPath = savedInstanceState.getString(PHOTO_PARAM);
+
+        dialogFragment = (ProgressDialogFragment) getFragmentManager().findFragmentByTag(DIALOG_TAG);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
-            FragmentManager fragmentManager = getFragmentManager();
-            ProgressDialogFragment newFragment = new ProgressDialogFragment();
-            newFragment.show(fragmentManager, "WaitingDialog");
+            dialogFragment = new ProgressDialogFragment();
+            dialogFragment.show(getFragmentManager(), DIALOG_TAG);
 
             Intent intent = new Intent(this, PhotoService.class);
             intent.putExtra(PHOTO_PARAM, mCurrentPhotoPath);
