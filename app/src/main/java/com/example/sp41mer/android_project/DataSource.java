@@ -32,15 +32,19 @@ public class DataSource {
         return items.get(position);
     }
 
-    void addItem(Item item) {
+    private void addItem(Item item) {
         items.add(item);
+    }
+
+    private void addItem(int pos, Item item) {
+        items.add(pos, item);
     }
 
     void removeItem(Item item) {
         items.remove(item);
     }
 
-    public static void readData(Cursor cursor) {
+    static void readData(Cursor cursor) {
         while (!cursor.isLast()) {
             cursor.moveToNext();
 
@@ -67,7 +71,7 @@ public class DataSource {
             final int fiftyK = cursor.getInt(10);
 
             Item item = new Item(id, date, picture, oneR, twoR, fiveR, tenR, oneK, fiveK, tenK, fiftyK);
-            dataSource.addItem(item);
+            dataSource.addItem(0, item);
         }
     }
 }

@@ -45,7 +45,7 @@ public class DBHelper extends SQLiteOpenHelper {
     static void readAll(Context context) {
         SQLiteDatabase database = getInstance(context).getReadableDatabase();
 
-        Cursor cursor = database.rawQuery("SELECT * FROM Data ORDER BY date DESC LIMIT 1000", null);
+        Cursor cursor = database.rawQuery("SELECT * FROM Data", null);
         if (cursor.getCount() == 0) {
             cursor.close();
             return;
