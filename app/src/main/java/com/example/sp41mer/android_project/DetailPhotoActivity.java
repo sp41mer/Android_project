@@ -1,7 +1,5 @@
 package com.example.sp41mer.android_project;
 
-import android.app.ActionBar;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,6 +10,8 @@ import com.google.android.gms.analytics.Tracker;
 
 public class DetailPhotoActivity extends AppCompatActivity {
 
+    private static final String EXTRA_ID = "id";
+
     Tracker mTracker;
 
     @Override
@@ -20,25 +20,17 @@ public class DetailPhotoActivity extends AppCompatActivity {
 
         //Для того, чтоб запихнуть кнопку назад. На стаке написано только
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         AnalyticsApplication application = (AnalyticsApplication) getApplication();
         mTracker = application.getDefaultTracker();
 
-        //Получаем параметры карточки text1 и text2
-        String text1 = getIntent().getExtras().getCharSequence("text1").toString();
-        String text2 = getIntent().getExtras().getCharSequence("text2").toString();
+        long id = getIntent().getLongExtra(EXTRA_ID, -1);
 
-        //Срем в логи
-        Log.d("First text: ", text1);
-        Log.d("Second text: ", text2);
+        Log.d("ID: ", String.valueOf(id));
         setContentView(R.layout.fragment_one_photo);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
     }
 
     @Override
@@ -50,17 +42,8 @@ public class DetailPhotoActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-
-    }
-
     public boolean onOptionsItemSelected(MenuItem item){
-//        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
-//        startActivityForResult(myIntent, 0);
         finish();
         return true;
-
     }
 }

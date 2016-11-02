@@ -5,8 +5,9 @@ import android.graphics.BitmapFactory;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Locale;
 
-public class Item {
+class Item {
 
     private final long id;
     private final Date date;
@@ -45,7 +46,7 @@ public class Item {
     }
 
     String getSum() {
-        return String.valueOf((oneR + twoR + fiveR + tenR) + (oneK + fiveK + tenK + fiftyK) / 100.) + " руб.";
+        return String.format(Locale.getDefault(), "%.2f", (oneR + twoR + fiveR + tenR) + (oneK + fiveK + tenK + fiftyK) / 100.) + " руб.";
     }
 
     Bitmap getPicture() {

@@ -16,6 +16,7 @@ import android.widget.TextView;
 public class StatsFragment extends Fragment {
 
     private static final String SCROLL_STATE = "scroll";
+    private static final String EXTRA_ID = "id";
 
     RecyclerView statsRecyclerView;
 
@@ -42,8 +43,7 @@ public class StatsFragment extends Fragment {
                     @Override public void onClick(View v) {
                         Intent intent = new Intent(v.getContext(), DetailPhotoActivity.class);
 
-                        intent.putExtra("text1", itemViewHolder.text1.getText());
-                        intent.putExtra("text2", itemViewHolder.text2.getText());
+                        intent.putExtra(EXTRA_ID, itemViewHolder.id);
                         startActivity(intent);
                     }
                 });
@@ -64,6 +64,8 @@ public class StatsFragment extends Fragment {
 
     private class ItemViewHolder extends RecyclerView.ViewHolder {
 
+        long id;
+
         LinearLayout linearLayout;
         private final TextView text1;
         private final TextView text2;
@@ -79,6 +81,8 @@ public class StatsFragment extends Fragment {
         }
 
         void bind(Item item) {
+            id = item.getId();
+
             text1.setText(String.valueOf(item.getSum()));
             text2.setText(item.getDate());
             picture.setImageBitmap(item.getPicture());
