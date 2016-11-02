@@ -1,6 +1,9 @@
 package com.example.sp41mer.android_project;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -22,8 +25,6 @@ import java.util.List;
 
 public class StatsFragment extends Fragment {
 
-    private RecyclerView statsRecyclerView;
-
     public StatsFragment() {}
 
     @Override
@@ -31,8 +32,8 @@ public class StatsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_stats, container, false);
 
-        final DataSource dataSource = new DataSource();
-        statsRecyclerView = (RecyclerView) rootView.findViewById(R.id.list_photos);
+        final DataSource dataSource = DataSource.getInstance();
+        RecyclerView statsRecyclerView = (RecyclerView) rootView.findViewById(R.id.list_photos);
         statsRecyclerView.setAdapter(new RecyclerView.Adapter() {
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -63,52 +64,8 @@ public class StatsFragment extends Fragment {
             }
         });
 
-        for (int i=0; i<5; i++) {
-            dataSource.addItem(new Item("a"+i, DateFormat.getDateTimeInstance().format(new Date()), "a"+i));
-        }
-
         statsRecyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
         return rootView;
-    }
-
-    private static class Item {
-
-        private final String text1;
-        private final String text2;
-        private final String picture;
-
-        Item(String cost, String date, String picturePath) {
-            this.text1 = cost;
-            this.text2 = date;
-            this.picture = picturePath;
-        }
-
-        String getText1() {
-            return text1;
-        }
-
-        String getText2() {
-            return text2;
-        }
-    }
-
-    private class DataSource {
-
-        private final List<Item> items = new ArrayList<>();
-
-        int getCount() {
-            return items.size();
-        }
-
-        Item getItem(int position) {
-            return items.get(position);
-        }
-
-        void addItem(Item item) {
-            items.add(item);
-            statsRecyclerView.getAdapter().notifyItemInserted(items.size() - 1);
-        }
-
     }
 
     private class ItemViewHolder extends RecyclerView.ViewHolder {
@@ -128,8 +85,9 @@ public class StatsFragment extends Fragment {
         }
 
         void bind(Item item) {
-            text1.setText(item.getText1());
-            text2.setText(item.getText2());
+            text1.setText(String.valueOf(item.getSum()));
+            text2.setText(item.getDate());
+            //picture.setImageBitmap(BitmapFactory.decodeFile(item.getPicture()));
         }
 
     }

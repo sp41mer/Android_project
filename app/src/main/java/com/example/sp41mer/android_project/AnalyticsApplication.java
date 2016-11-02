@@ -1,9 +1,5 @@
 package com.example.sp41mer.android_project;
 
-/**
- * Created by sp41mer on 31.10.16.
- */
-
 import android.app.Application;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
@@ -25,4 +21,12 @@ public class AnalyticsApplication extends Application {
         }
         return mTracker;
     }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        DBHelper.readAll(this);
+    }
+
 }

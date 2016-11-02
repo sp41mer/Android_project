@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 
 //TODO: Верстка едет при повороте
@@ -44,8 +45,10 @@ public class MainActivity extends AppCompatActivity
 
     static final int REQUEST_TAKE_PHOTO = 1;
     private static final String PHOTO_PARAM = "photo";
+    private static final String MENU_POSITION_PARAM = "menu_position";
     private static final String ACTION_SERVER_RESPONSE = "server_response";
     private static final String DIALOG_TAG = "waiting_dialog";
+    private static final String EXTRA_ROW_ID = "newRowId";
 
     NavigationView navigationView;
     Toolbar toolbar;
@@ -53,12 +56,22 @@ public class MainActivity extends AppCompatActivity
     String mCurrentPhotoPath;
 
     BroadcastReceiver broadcastReceiver;
+
     ProgressDialogFragment dialogFragment;
+    FirstFragment firstFragment = new FirstFragment();
+    StatsFragment statsFragment = new StatsFragment();
+
+    DBHelper dbHelper;
+
+    private int menuPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        firstFragment.setRetainInstance(true);
+        statsFragment.setRetainInstance(true);
 
         AnalyticsApplication application = (AnalyticsApplication) getApplication();
         mTracker = application.getDefaultTracker();
@@ -84,14 +97,6 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_home);
-
-        Fragment fragment = new FirstFragment();
-
-        android.support.v4.app.FragmentTransaction fragmentTransaction =
-                getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment);
-        fragmentTransaction.commit();
-
     }
 
     @Override
@@ -101,10 +106,16 @@ public class MainActivity extends AppCompatActivity
         mTracker.setScreenName("Image~Копилка");
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
+        onNavigationItemSelected(navigationView.getMenu().getItem(menuPosition));
+
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (intent.getAction().equals(ACTION_SERVER_RESPONSE)) {
+                    long id = intent.getLongExtra(EXTRA_ROW_ID, -1);
+                    DBHelper.readOne(MainActivity.this, id);
+
+
                     Dialog dialog = dialogFragment.getDialog();
                     if (dialog != null) {
                         dialog.cancel();
@@ -146,14 +157,17 @@ public class MainActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.nav_home:
                 Log.d("Нажатие в навигаторе", "Нажал на копилку");
-                fragment = new FirstFragment();
+                fragment = firstFragment;
+                menuPosition = 0;
                 break;
             case R.id.nav_stat:
                 Log.d("Нажатие в навигаторе", "Нажал на статистику");
-                fragment = new StatsFragment();
+                fragment = statsFragment;
+                menuPosition = 1;
                 break;
             case R.id.nav_manage:
-                fragment = new FirstFragment(); //TODO
+                fragment = firstFragment; //TODO
+                menuPosition = 2;
                 Log.d("Нажатие в навигаторе", "Нажал на настройки");
 
                 break;
@@ -166,9 +180,8 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @SuppressLint("SimpleDateFormat")
     private File createImageFile() throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String imageFileName = timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
@@ -204,11 +217,13 @@ public class MainActivity extends AppCompatActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(PHOTO_PARAM, mCurrentPhotoPath);
+        outState.putInt(MENU_POSITION_PARAM, menuPosition);
     }
 
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         mCurrentPhotoPath = savedInstanceState.getString(PHOTO_PARAM);
+        menuPosition = savedInstanceState.getInt(MENU_POSITION_PARAM);
 
         dialogFragment = (ProgressDialogFragment) getFragmentManager().findFragmentByTag(DIALOG_TAG);
     }
