@@ -4,6 +4,8 @@ package com.example.sp41mer.android_project;
 import android.app.Service;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Base64;
@@ -12,6 +14,7 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Random;
@@ -103,6 +106,14 @@ public class PhotoService extends Service {
             values.put("picture", photoPath);
             long id = DBHelper.getInstance(this).getWritableDatabase().insert("Data", null, values);
 
+            scalePhoto(photoPath);
+
+            try {
+                Thread.sleep(3000);
+            } catch (Exception e) {
+                return;
+            }
+
             Intent intent = new Intent(ACTION_SERVER_RESPONSE);
             intent.putExtra(EXTRA_ROW_ID, id);
             LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
@@ -127,5 +138,29 @@ public class PhotoService extends Service {
         Response response = client.newCall(request).execute();
 
         return response.body().string();
+    }
+
+    void scalePhoto(String photoPath) {
+        Bitmap img = BitmapFactory.decodeFile(photoPath);
+        final int width = 300;
+        int height = (int)(((double)width / img.getWidth()) * img.getHeight());
+        img = Bitmap.createScaledBitmap(img, width, height, false);
+
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream(photoPath);
+            img.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fileOutputStream != null) {
+                    fileOutputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 }

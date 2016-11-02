@@ -1,16 +1,11 @@
 package com.example.sp41mer.android_project;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +13,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 public class StatsFragment extends Fragment {
+
+    private static final String SCROLL_STATE = "scroll";
+
+    RecyclerView statsRecyclerView;
 
     public StatsFragment() {}
 
@@ -33,7 +27,7 @@ public class StatsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_stats, container, false);
 
         final DataSource dataSource = DataSource.getInstance();
-        RecyclerView statsRecyclerView = (RecyclerView) rootView.findViewById(R.id.list_photos);
+        statsRecyclerView = (RecyclerView) rootView.findViewById(R.id.list_photos);
         statsRecyclerView.setAdapter(new RecyclerView.Adapter() {
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -87,9 +81,23 @@ public class StatsFragment extends Fragment {
         void bind(Item item) {
             text1.setText(String.valueOf(item.getSum()));
             text2.setText(item.getDate());
-            //picture.setImageBitmap(BitmapFactory.decodeFile(item.getPicture()));
+            picture.setImageBitmap(item.getPicture());
         }
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(SCROLL_STATE, statsRecyclerView.getScrollY());
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            statsRecyclerView.setScrollY(savedInstanceState.getInt(SCROLL_STATE, 0));
+        }
     }
 
 }

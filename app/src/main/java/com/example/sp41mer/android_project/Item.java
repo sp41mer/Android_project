@@ -1,5 +1,8 @@
 package com.example.sp41mer.android_project;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -16,13 +19,12 @@ public class Item {
     private final int tenK;
     private final int fiftyK;
 
-    private final String picture;
+    private final Bitmap picture;
 
     Item(long id, Date date, String picture, int oneR, int twoR, int fiveR, int tenR,
          int oneK, int fiveK, int tenK, int fiftyK) {
         this.id = id;
         this.date = date;
-        this.picture = picture;
         this.oneR = oneR;
         this.twoR = twoR;
         this.fiveR = fiveR;
@@ -31,6 +33,7 @@ public class Item {
         this.fiveK = fiveK;
         this.tenK = tenK;
         this.fiftyK = fiftyK;
+        this.picture = BitmapFactory.decodeFile(picture);
     }
 
     String getDate() {
@@ -45,7 +48,7 @@ public class Item {
         return String.valueOf((oneR + twoR + fiveR + tenR) + (oneK + fiveK + tenK + fiftyK) / 100.) + " руб.";
     }
 
-    String getPicture() {
+    Bitmap getPicture() {
         return picture;
     }
 

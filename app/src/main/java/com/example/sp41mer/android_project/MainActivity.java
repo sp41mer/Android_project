@@ -1,6 +1,5 @@
 package com.example.sp41mer.android_project;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -58,10 +57,8 @@ public class MainActivity extends AppCompatActivity
     BroadcastReceiver broadcastReceiver;
 
     ProgressDialogFragment dialogFragment;
-    FirstFragment firstFragment = new FirstFragment();
-    StatsFragment statsFragment = new StatsFragment();
-
-    DBHelper dbHelper;
+    FirstFragment firstFragment;
+    StatsFragment statsFragment;
 
     private int menuPosition = 0;
 
@@ -70,8 +67,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        firstFragment.setRetainInstance(true);
-        statsFragment.setRetainInstance(true);
+        firstFragment = new FirstFragment();
+        statsFragment = new StatsFragment();
 
         AnalyticsApplication application = (AnalyticsApplication) getApplication();
         mTracker = application.getDefaultTracker();
@@ -114,7 +111,10 @@ public class MainActivity extends AppCompatActivity
                 if (intent.getAction().equals(ACTION_SERVER_RESPONSE)) {
                     long id = intent.getLongExtra(EXTRA_ROW_ID, -1);
                     DBHelper.readOne(MainActivity.this, id);
-
+                    if (statsFragment != null && statsFragment.statsRecyclerView != null) {
+                        statsFragment.statsRecyclerView.getAdapter().notifyItemInserted(0);
+                        statsFragment.statsRecyclerView.scrollToPosition(0);
+                    }
 
                     Dialog dialog = dialogFragment.getDialog();
                     if (dialog != null) {
@@ -218,12 +218,18 @@ public class MainActivity extends AppCompatActivity
         super.onSaveInstanceState(outState);
         outState.putString(PHOTO_PARAM, mCurrentPhotoPath);
         outState.putInt(MENU_POSITION_PARAM, menuPosition);
+        try {
+            getSupportFragmentManager().putFragment(outState, "stats", statsFragment);
+        } catch (IllegalStateException | NullPointerException ignored) {}
     }
 
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         mCurrentPhotoPath = savedInstanceState.getString(PHOTO_PARAM);
         menuPosition = savedInstanceState.getInt(MENU_POSITION_PARAM);
+        Fragment fragment = getSupportFragmentManager().getFragment(savedInstanceState, "stats");
+        if (fragment != null)
+            statsFragment = (StatsFragment) fragment;
 
         dialogFragment = (ProgressDialogFragment) getFragmentManager().findFragmentByTag(DIALOG_TAG);
     }

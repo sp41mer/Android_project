@@ -6,12 +6,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-
-public class DBHelper extends SQLiteOpenHelper {
+class DBHelper extends SQLiteOpenHelper {
 
     private static final String LOG_TAG = "Database";
 
-    public static DBHelper getInstance(Context context) {
+    static DBHelper getInstance(Context context) {
         return new DBHelper(context);
     }
 
