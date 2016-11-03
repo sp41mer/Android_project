@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sp41mer.android_project">
+    package="com.technopark.dreamteam.moneybox">
 
     <supports-screens
         android:resizeable="true"
@@ -47,7 +47,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.example.sp41mer.fileprovider"
+            android:authorities="com.technopark.dreamteam.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -57,7 +57,7 @@
 
         <service
             android:name=".PhotoService"
-            android:exported="false"></service>
+            android:exported="false" />
     </application>
 
 </manifest>
