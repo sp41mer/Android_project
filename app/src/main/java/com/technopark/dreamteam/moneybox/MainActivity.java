@@ -1,4 +1,4 @@
-package com.example.sp41mer.android_project;
+package com.technopark.dreamteam.moneybox;
 
 import android.Manifest;
 import android.app.Dialog;
@@ -37,10 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-
 //TODO: Верстка едет при повороте
-//TODO: Переименовать ID на нормальные
-//TODO:
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -114,10 +111,6 @@ public class MainActivity extends AppCompatActivity
                 if (intent.getAction().equals(ACTION_SERVER_RESPONSE)) {
                     long id = intent.getLongExtra(EXTRA_ROW_ID, -1);
                     DBHelper.readOne(MainActivity.this, id);
-                    if (statsFragment != null && statsFragment.statsRecyclerView != null) {
-                        statsFragment.statsRecyclerView.getAdapter().notifyItemInserted(0);
-                        statsFragment.statsRecyclerView.scrollToPosition(0);
-                    }
 
                     Dialog dialog = dialogFragment.getDialog();
                     if (dialog != null) {
@@ -177,7 +170,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         fragmentTransaction.replace(R.id.fragment_container, fragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.commitAllowingStateLoss();
 
         ((DrawerLayout)findViewById(R.id.drawer_layout)).closeDrawer(GravityCompat.START);
         return true;
@@ -228,7 +221,7 @@ public class MainActivity extends AppCompatActivity
 
             if (photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.example.sp41mer.fileprovider",
+                        "com.technopark.dreamteam.fileprovider",
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);

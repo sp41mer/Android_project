@@ -1,9 +1,13 @@
-package com.example.sp41mer.android_project;
+package com.technopark.dreamteam.moneybox;
 
 import android.app.Application;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MoneyboxApplication extends Application {
 
@@ -26,7 +30,13 @@ public class MoneyboxApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        DBHelper.readAll(this);
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+                DBHelper.readAll(MoneyboxApplication.this);
+            }
+        });
     }
 
 }

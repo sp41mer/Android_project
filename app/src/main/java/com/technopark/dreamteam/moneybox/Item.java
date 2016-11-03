@@ -1,4 +1,4 @@
-package com.example.sp41mer.android_project;
+package com.technopark.dreamteam.moneybox;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -53,35 +53,35 @@ class Item {
         return picture;
     }
 
-    public int getOneR() {
+    int getOneR() {
         return oneR;
     }
 
-    public int getFiftyK() {
+    int getFiftyK() {
         return fiftyK;
     }
 
-    public int getFiveK() {
+    int getFiveK() {
         return fiveK;
     }
 
-    public int getFiveR() {
+    int getFiveR() {
         return fiveR;
     }
 
-    public int getOneK() {
+    int getOneK() {
         return oneK;
     }
 
-    public int getTenK() {
+    int getTenK() {
         return tenK;
     }
 
-    public int getTenR() {
+    int getTenR() {
         return tenR;
     }
 
-    public int getTwoR() {
+    int getTwoR() {
         return twoR;
     }
 

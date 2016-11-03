@@ -1,7 +1,8 @@
-package com.example.sp41mer.android_project;
+package com.technopark.dreamteam.moneybox;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,6 +33,8 @@ public class StatsFragment extends Fragment {
         final DataSource dataSource = DataSource.getInstance();
         statsRecyclerView = (RecyclerView) rootView.findViewById(R.id.list_photos);
         fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+
+        DataSource.getInstance().setRecyclerView(statsRecyclerView);
 
         statsRecyclerView.setAdapter(new RecyclerView.Adapter() {
             @Override
@@ -126,5 +129,6 @@ public class StatsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         fab.show();
+        DataSource.getInstance().setRecyclerView(null);
     }
 }

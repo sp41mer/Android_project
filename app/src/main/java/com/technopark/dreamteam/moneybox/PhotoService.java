@@ -1,5 +1,4 @@
-package com.example.sp41mer.android_project;
-
+package com.technopark.dreamteam.moneybox;
 
 import android.app.Service;
 import android.content.ContentValues;
@@ -142,7 +141,7 @@ public class PhotoService extends Service {
 
     void scalePhoto(String photoPath) {
         Bitmap img = BitmapFactory.decodeFile(photoPath);
-        final int width = 300;
+        final int width = 1000;
         int height = (int)(((double)width / img.getWidth()) * img.getHeight());
         img = Bitmap.createScaledBitmap(img, width, height, false);
 

@@ -1,5 +1,4 @@
-package com.example.sp41mer.android_project;
-
+package com.technopark.dreamteam.moneybox;
 
 import android.app.Activity;
 import android.app.Dialog;

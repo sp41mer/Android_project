@@ -1,28 +1,36 @@
-package com.example.sp41mer.android_project;
+package com.technopark.dreamteam.moneybox;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
+import android.support.v7.widget.RecyclerView;
+import android.util.SparseArray;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
-
-public class DataSource {
+class DataSource {
 
     private static final DataSource dataSource = new DataSource();
 
-    public static DataSource getInstance() {
+    static DataSource getInstance() {
         return dataSource;
     }
 
     private DataSource() {}
 
     private final List<Item> items = new ArrayList<>();
+    @SuppressLint("UseSparseArrays")
+    private final Map<Long, Item> idToItem = new HashMap<>();
+
+    private RecyclerView recyclerView;
 
     int getCount() {
         return items.size();
@@ -32,12 +40,22 @@ public class DataSource {
         return items.get(position);
     }
 
+    Item getItemById(long id) {
+        return idToItem.get(id);
+    }
+
     private void addItem(Item item) {
-        items.add(item);
+        addItem(items.size() - 1, item);
     }
 
     private void addItem(int pos, Item item) {
         items.add(pos, item);
+        idToItem.put(item.getId(), item);
+
+        if (recyclerView != null) { //TODO
+            recyclerView.getAdapter().notifyItemInserted(pos);
+            recyclerView.scrollToPosition(pos);
+        }
     }
 
     void removeItem(Item item) {
@@ -73,5 +91,9 @@ public class DataSource {
             Item item = new Item(id, date, picture, oneR, twoR, fiveR, tenR, oneK, fiveK, tenK, fiftyK);
             dataSource.addItem(0, item);
         }
+    }
+
+    void setRecyclerView(RecyclerView recyclerView) {
+        this.recyclerView = recyclerView;
     }
 }
