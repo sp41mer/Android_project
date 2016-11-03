@@ -2,6 +2,7 @@ package com.example.sp41mer.android_project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,7 @@ public class StatsFragment extends Fragment {
     private static final String EXTRA_ID = "id";
 
     RecyclerView statsRecyclerView;
+    FloatingActionButton fab;
 
     public StatsFragment() {}
 
@@ -29,10 +31,12 @@ public class StatsFragment extends Fragment {
 
         final DataSource dataSource = DataSource.getInstance();
         statsRecyclerView = (RecyclerView) rootView.findViewById(R.id.list_photos);
+        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+
         statsRecyclerView.setAdapter(new RecyclerView.Adapter() {
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.album_card, parent, false);
+                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.stats_card, parent, false);
                 return new ItemViewHolder(v);
             }
 
@@ -55,6 +59,20 @@ public class StatsFragment extends Fragment {
             @Override
             public int getItemCount() {
                 return dataSource.getCount();
+            }
+        });
+
+        statsRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if (dy > 0) {
+                    fab.hide();
+                } else if (dy < 0) {
+                    fab.show();
+                }
             }
         });
 
@@ -104,4 +122,9 @@ public class StatsFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        fab.show();
+    }
 }

@@ -39,8 +39,6 @@ import java.util.Locale;
 
 
 //TODO: Верстка едет при повороте
-//TODO: Удалить троеточие -> Settings
-//TODO: Определить фрагмент при повороте
 //TODO: Переименовать ID на нормальные
 //TODO:
 public class MainActivity extends AppCompatActivity
@@ -62,7 +60,7 @@ public class MainActivity extends AppCompatActivity
     BroadcastReceiver broadcastReceiver;
 
     ProgressDialogFragment dialogFragment;
-    FirstFragment firstFragment;
+    HomeFragment homeFragment;
     StatsFragment statsFragment;
 
     private int menuPosition = 0;
@@ -72,10 +70,10 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        firstFragment = new FirstFragment();
+        homeFragment = new HomeFragment();
         statsFragment = new StatsFragment();
 
-        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        MoneyboxApplication application = (MoneyboxApplication) getApplication();
         mTracker = application.getDefaultTracker();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -162,7 +160,7 @@ public class MainActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.nav_home:
                 Log.d("Нажатие в навигаторе", "Нажал на копилку");
-                fragment = firstFragment;
+                fragment = homeFragment;
                 menuPosition = 0;
                 break;
             case R.id.nav_stat:
@@ -171,7 +169,7 @@ public class MainActivity extends AppCompatActivity
                 menuPosition = 1;
                 break;
             case R.id.nav_manage:
-                fragment = firstFragment; //TODO
+                fragment = homeFragment; //TODO
                 menuPosition = 2;
                 Log.d("Нажатие в навигаторе", "Нажал на настройки");
 

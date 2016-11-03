@@ -24,13 +24,13 @@ public class DetailPhotoActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        MoneyboxApplication application = (MoneyboxApplication) getApplication();
         mTracker = application.getDefaultTracker();
 
         long id = getIntent().getLongExtra(EXTRA_ID, -1);
 
         Log.d("ID: ", String.valueOf(id));
-        setContentView(R.layout.fragment_one_photo);
+        setContentView(R.layout.activity_details);
     }
 
     @Override
