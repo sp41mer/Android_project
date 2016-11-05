@@ -105,8 +105,6 @@ public class PhotoService extends Service {
             values.put("picture", photoPath);
             long id = DBHelper.getInstance(this).getWritableDatabase().insert("Data", null, values);
 
-            scalePhoto(photoPath);
-
             try {
                 Thread.sleep(3000);
             } catch (Exception e) {
@@ -137,29 +135,5 @@ public class PhotoService extends Service {
         Response response = client.newCall(request).execute();
 
         return response.body().string();
-    }
-
-    void scalePhoto(String photoPath) {
-        Bitmap img = BitmapFactory.decodeFile(photoPath);
-        final int width = 1000;
-        int height = (int)(((double)width / img.getWidth()) * img.getHeight());
-        img = Bitmap.createScaledBitmap(img, width, height, false);
-
-        FileOutputStream fileOutputStream = null;
-        try {
-            fileOutputStream = new FileOutputStream(photoPath);
-            img.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (fileOutputStream != null) {
-                    fileOutputStream.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
     }
 }

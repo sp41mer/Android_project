@@ -3,6 +3,7 @@ package com.technopark.dreamteam.moneybox;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 public class StatsFragment extends Fragment {
 
     private static final String SCROLL_STATE = "scroll";
@@ -22,8 +25,16 @@ public class StatsFragment extends Fragment {
 
     RecyclerView statsRecyclerView;
     FloatingActionButton fab;
+    Picasso picasso;
 
     public StatsFragment() {}
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        picasso = Picasso.with(getContext());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -106,7 +117,7 @@ public class StatsFragment extends Fragment {
 
             text1.setText(String.valueOf(item.getSum()));
             text2.setText(item.getDate());
-            picture.setImageBitmap(item.getPicture());
+            picasso.load(item.getPicture()).fit().centerCrop().into(picture);
         }
 
     }

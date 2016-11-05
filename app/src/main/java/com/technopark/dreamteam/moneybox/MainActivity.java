@@ -70,6 +70,9 @@ public class MainActivity extends AppCompatActivity
         homeFragment = new HomeFragment();
         statsFragment = new StatsFragment();
 
+        homeFragment.setRetainInstance(true);
+        statsFragment.setRetainInstance(true);
+
         MoneyboxApplication application = (MoneyboxApplication) getApplication();
         mTracker = application.getDefaultTracker();
 
@@ -124,14 +127,12 @@ public class MainActivity extends AppCompatActivity
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, intentFilter);
     }
 
-
     @Override
     public void onPause() {
         super.onPause();
 
         LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
     }
-
 
     @Override
     public void onBackPressed() {

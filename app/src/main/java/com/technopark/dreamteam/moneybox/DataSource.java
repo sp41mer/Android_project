@@ -18,6 +18,7 @@ import java.util.TimeZone;
 
 class DataSource {
 
+    @SuppressLint("StaticFieldLeak")
     private static final DataSource dataSource = new DataSource();
 
     static DataSource getInstance() {

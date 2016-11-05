@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.squareup.picasso.Picasso;
 
 public class DetailPhotoActivity extends AppCompatActivity {
 
@@ -80,6 +81,6 @@ public class DetailPhotoActivity extends AppCompatActivity {
         fiftyK.setText(String.valueOf(item.getFiftyK()));
         count.setText(String.valueOf(item.getCount()));
         sum.setText(item.getSum());
-        photo.setImageBitmap(item.getPicture());
+        Picasso.with(this).load(item.getPicture()).fit().centerInside().into(photo);
     }
 }

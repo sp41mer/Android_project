@@ -20,12 +20,10 @@
         <ImageView
             android:id="@+id/card_image"
             android:tag="image_tag"
-            android:layout_height="match_parent"
+            android:layout_height="120dp"
             android:layout_weight="0.40"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_menu_slideshow"
             android:layout_width="0dp"
-            android:adjustViewBounds="true" />
+            android:padding="5dp" />
 
         <LinearLayout
             android:layout_width="0dp"

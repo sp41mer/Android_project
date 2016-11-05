@@ -20,7 +20,7 @@ class Item {
     private final int tenK;
     private final int fiftyK;
 
-    private final Bitmap picture;
+    private final String picture;
 
     Item(long id, Date date, String picture, int oneR, int twoR, int fiveR, int tenR,
          int oneK, int fiveK, int tenK, int fiftyK) {
@@ -34,7 +34,7 @@ class Item {
         this.fiveK = fiveK;
         this.tenK = tenK;
         this.fiftyK = fiftyK;
-        this.picture = BitmapFactory.decodeFile(picture);
+        this.picture = picture;
     }
 
     String getDate() {
@@ -49,8 +49,8 @@ class Item {
         return String.format(Locale.getDefault(), "%.2f", (oneR + twoR + fiveR + tenR) + (oneK + fiveK + tenK + fiftyK) / 100.) + " руб.";
     }
 
-    Bitmap getPicture() {
-        return picture;
+    String getPicture() {
+        return "file:" + picture;
     }
 
     int getOneR() {
