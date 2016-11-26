@@ -45,7 +45,16 @@ public class StatsFragment extends Fragment {
         statsRecyclerView = (RecyclerView) rootView.findViewById(R.id.list_photos);
         fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
 
-        DataSource.getInstance().setRecyclerView(statsRecyclerView);
+        //DataSource.getInstance().setRecyclerView(statsRecyclerView);
+        DataSource.getInstance().registerCallback(new DataSourceCallback() {
+            @Override
+            public void callBackToRecyclerView(int pos) {
+                if (statsRecyclerView != null) {
+                    statsRecyclerView.getAdapter().notifyItemInserted(pos);
+                    statsRecyclerView.scrollToPosition(pos);
+                }
+            }
+        });
 
         statsRecyclerView.setAdapter(new RecyclerView.Adapter() {
             @Override
@@ -140,6 +149,7 @@ public class StatsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         fab.show();
-        DataSource.getInstance().setRecyclerView(null);
+        //DataSource.getInstance().setRecyclerView(null);
+        DataSource.getInstance().registerCallback(null);
     }
 }

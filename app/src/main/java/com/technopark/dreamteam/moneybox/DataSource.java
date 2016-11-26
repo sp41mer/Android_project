@@ -31,7 +31,13 @@ class DataSource {
     @SuppressLint("UseSparseArrays")
     private final Map<Long, Item> idToItem = new HashMap<>();
 
-    private RecyclerView recyclerView;
+    //private RecyclerView recyclerView; //TODO - delete it
+
+    private DataSourceCallback callback;
+
+    public void registerCallback(DataSourceCallback callback) {
+        this.callback = callback;
+    }
 
     int getCount() {
         return items.size();
@@ -53,9 +59,8 @@ class DataSource {
         items.add(pos, item);
         idToItem.put(item.getId(), item);
 
-        if (recyclerView != null) { //TODO
-            recyclerView.getAdapter().notifyItemInserted(pos);
-            recyclerView.scrollToPosition(pos);
+        if (callback != null) {
+            callback.callBackToRecyclerView(pos);
         }
     }
 
@@ -92,9 +97,5 @@ class DataSource {
             Item item = new Item(id, date, picture, oneR, twoR, fiveR, tenR, oneK, fiveK, tenK, fiftyK);
             dataSource.addItem(0, item);
         }
-    }
-
-    void setRecyclerView(RecyclerView recyclerView) {
-        this.recyclerView = recyclerView;
     }
 }
