@@ -128,6 +128,8 @@ public class MainActivity extends AppCompatActivity
 
         double sum = DBHelper.calculateSum(this);
 
+
+
     }
 
     @Override

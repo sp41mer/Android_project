@@ -15,12 +15,13 @@
         android:adjustViewBounds="true" />
 
     <TextView
+        android:id ="@+id/money_summary_text"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_marginBottom="40dp"
         android:layout_gravity="center_horizontal"
         android:textSize = "24sp"
-        android:text = "Пока 0 рублей"
+        android:text = "@string/no_money"
         android:padding="15dp" />
 
 </LinearLayout>

@@ -21,6 +21,6 @@
         android:padding="15dp"
         android:layout_gravity="center_horizontal"
         android:textSize = "25sp"
-        android:text = "Пока 0 рублей"/>
+        android:text = "@string/no_money"/>
 
 </LinearLayout>
