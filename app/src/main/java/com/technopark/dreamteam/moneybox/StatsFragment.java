@@ -126,7 +126,7 @@ public class StatsFragment extends Fragment {
 
             text1.setText(String.valueOf(item.getSum()));
             text2.setText(item.getDate());
-            picasso.load(item.getPicture()).fit().centerCrop().into(picture);
+            picasso.load(item.getPicture()).fit().centerInside().into(picture);
         }
 
     }

@@ -125,6 +125,9 @@ public class MainActivity extends AppCompatActivity
 
         IntentFilter intentFilter = new IntentFilter(ACTION_SERVER_RESPONSE);
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, intentFilter);
+
+        double sum = DBHelper.calculateSum(this);
+
     }
 
     @Override
