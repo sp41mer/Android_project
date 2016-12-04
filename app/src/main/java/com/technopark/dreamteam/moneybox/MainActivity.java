@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity
 
     private int menuPosition = 0;
 
+    public double sum = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,10 +127,6 @@ public class MainActivity extends AppCompatActivity
 
         IntentFilter intentFilter = new IntentFilter(ACTION_SERVER_RESPONSE);
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, intentFilter);
-
-        double sum = DBHelper.calculateSum(this);
-
-
 
     }
 
