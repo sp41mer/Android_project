@@ -31,7 +31,12 @@ public class HomeFragment extends Fragment {
         int moneys = (int) sum;
 
         TextView moneymessage = (TextView) rootView.findViewById(R.id.money_summary_text);
-        String newText = String.format(getResources().getString(R.string.money_text),moneys);
+        String newText;
+        if (moneys != 0) {
+            newText = String.format(getResources().getString(R.string.money_text), moneys);
+        } else {
+            newText = getResources().getString(R.string.no_money);
+        }
 
         moneymessage.setText(newText);
 
