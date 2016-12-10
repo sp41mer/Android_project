@@ -14,6 +14,9 @@
     <string name = "no_money">Пока 0 рублей</string>
     <string name = "money_text">Ух ты! У тебя уже %1$d рублей!</string>
 
+    <string name = "goal_button_text">Создать цель</string>
+    <string name = "goal_text_view_text">Ваша цель - %1$d !</string>
+
     <string name="banner_ad_unit_id">ca-app-pub-2156340139005509/3523101475</string>
 
 </resources>
