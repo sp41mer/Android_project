@@ -16,7 +16,7 @@
 
     <!-- stats_cards styles-->
     <style name="AppTheme.stats_card__cards__image">
-        <item name="android:layout_weight">@dimen/layout_weight_0_4</item>
+        <item name="android:layout_weight">0.4</item>
         <item name="android:layout_height">@dimen/layout_height_120</item>
         <item name="android:layout_width">@dimen/layout_width_0</item>
         <item name="android:padding">@dimen/size_5</item>
@@ -33,7 +33,7 @@
     <style name="AppTheme.stats_card__linear_layout__inner">
         <item name="android:layout_width">@dimen/layout_width_0</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_weight">@dimen/layout_weight_0_8</item>
+        <item name="android:layout_weight">0.8</item>
         <item name="android:orientation">vertical</item>
     </style>
 
@@ -317,7 +317,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:inputType">number</item>
-        <item name="android:ems">@dimen/ten</item>
+        <item name="android:ems">10</item>
     </style>
 
     <style name="AppTheme.fragment_settings__card__linear_layout__text_view__first">

@@ -31,12 +31,12 @@
     <dimen name="size_5">5dp</dimen>
 
 
-    <dimen name="ten">10</dimen>
+    <!--<dimen name="ten">10</dimen>-->
 
     <dimen name="layout_height_120">120dp</dimen>
 
-    <dimen name="layout_weight_0_4">0.40</dimen>
-    <dimen name="layout_weight_0_8">0.8</dimen>
+    <!--<dimen name="layout_weight_0_4" format="float">0.4</dimen>-->
+    <!--<dimen name="layout_weight_0_8" format="float">0.8</dimen>-->
 
     <dimen name="layout_width_0">0dp</dimen>
     <dimen name="layout_width_250">250dp</dimen>
