@@ -1,14 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    style="@style/AppTheme.fragment_stats__relative_layout"
     tools:context=".StatsFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_photos"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        style="@style/AppTheme.fragment_stats__recycler_view" >
     </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

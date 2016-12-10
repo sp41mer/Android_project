@@ -2,38 +2,26 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    style="@style/AppTheme.app_bar_main__coordinator_layout"
     tools:context=".MainActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        style="@style/AppTheme.app_bar_main__app_bar_layout" >
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            style="@style/AppTheme.app_bar_main__app_bar_layout__toolbar"/>
 
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
         android:id="@+id/fragment_container"
-        android:paddingTop="55dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        style="@style/AppTheme.app_bar_main__frame_layout">
     </FrameLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_camera" />
+        style="@style/AppTheme.app_bar_main__floating_action_button" />
 
 </android.support.design.widget.CoordinatorLayout>
