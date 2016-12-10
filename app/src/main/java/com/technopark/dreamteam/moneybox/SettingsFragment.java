@@ -20,25 +20,29 @@ import com.squareup.picasso.Picasso;
 public class SettingsFragment extends Fragment {
     public SettingsFragment() {}
 
-    double sum = 0;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        final Context context = getActivity().getApplicationContext();
 
         final Button button = (Button) rootView.findViewById(R.id.goal_button);
+        long my_goal = DBHelper.readGoal(context);
         final TextView money_goal = (TextView) rootView.findViewById(R.id.goal_text);
+        money_goal.setText(Long.toString(my_goal));
+        final EditText edit_text = (EditText) rootView.findViewById(R.id.goal_input);
         button.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
-                EditText edit_text = (EditText) findViewById(R.id.goal_input);
                 String goal = edit_text.getText().toString();
-                int num_goal = Integer.parseInt(goal);
-                money_goal.setText(num_goal);
+                long num_goal = Long.parseLong(goal);
+                DBHelper.AddGoal(context,num_goal);
+                money_goal.setText(Long.toString(num_goal));
             }
         });
+
         return rootView;
     }
 }

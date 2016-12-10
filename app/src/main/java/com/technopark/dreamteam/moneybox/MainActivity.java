@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity
                 menuPosition = 1;
                 break;
             case R.id.nav_manage:
-                fragment = homeFragment; //TODO
+                fragment = settingsFragment;
                 menuPosition = 2;
                 Log.d("Нажатие в навигаторе", "Нажал на настройки");
 
