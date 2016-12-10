@@ -36,7 +36,6 @@ public class SettingsFragment extends Fragment {
                 EditText edit_text = (EditText) findViewById(R.id.goal_input);
                 String goal = edit_text.getText().toString();
                 int num_goal = Integer.parseInt(goal);
-
                 money_goal.setText(num_goal);
             }
         });
