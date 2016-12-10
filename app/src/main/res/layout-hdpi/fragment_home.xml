@@ -1,27 +1,34 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".HomeFragment">
+    android:fillViewport="true">
 
-    <ImageView
-        android:id="@+id/picture"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center_horizontal"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".HomeFragment">
 
-    <TextView
-        android:id ="@+id/money_summary_text"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:layout_gravity="center_horizontal"
-        android:textSize = "24sp"
-        android:text = "@string/no_money"
-        android:padding="15dp" />
+        <ImageView
+            android:id="@+id/picture"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/money_summary_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="40dp"
+            android:padding="15dp"
+            android:text="@string/no_money"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+</ScrollView>

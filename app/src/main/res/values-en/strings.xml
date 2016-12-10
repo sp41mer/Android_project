@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Smart KOPILKA</string>
+    <string name="goal_button_text">Create goal</string>
+    <string name="goal_text_view_text">Your goal</string>
+    <string name="menu_big_header">Smart KOPILKA</string>
+    <string name="menu_current">KOPILKA</string>
+    <string name="menu_settings">Ssttings</string>
+    <string name="menu_small_header">Forget about calculator</string>
+    <string name="menu_stats">Statistics</string>
+    <string name="money_text">%1$d Rubles</string>
+    <string name="navigation_drawer_close"></string>
+    <string name="no_money">Meh, 0 Rubles</string>
+</resources>
