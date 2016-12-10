@@ -64,7 +64,7 @@ public class DetailPhotoActivity extends AppCompatActivity {
                     public void run() {
                         mAdView.loadAd(adRequest);
                     }
-                }, 500
+                }, 1500
         );
     }
 
