@@ -34,6 +34,8 @@ class DBHelper extends SQLiteOpenHelper {
                 "fiveK INTEGER," +
                 "tenK INTEGER," +
                 "fiftyK INTEGER);");
+        db.execSQL("CREATE TABLE Goal (id INTEGER PRIMARY KEY AUTOINCREMENT,goal INTEGER);");
+        db.execSQL("INSERT INTO Goal VALUES (100);");
     }
 
     @Override
@@ -64,6 +66,19 @@ class DBHelper extends SQLiteOpenHelper {
         }
 
         DataSource.readData(cursor);
+        cursor.close();
+    }
+
+    static void deleteOne(Context context, long id){
+        SQLiteDatabase database = getInstance(context).getReadableDatabase();
+
+        Cursor cursor = database.rawQuery("DELETE * FROM Data WHERE id=?", new String[]{ String.valueOf(id) });
+        cursor.close();
+    }
+
+    static void AddGoal(Context context, long id){
+        SQLiteDatabase database = getInstance(context).getReadableDatabase();
+        Cursor cursor = database.rawQuery("UPDATE Goal SET goal=? WHERE id=1", new String[]{ String.valueOf(id) });
         cursor.close();
     }
 

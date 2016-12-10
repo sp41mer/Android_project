@@ -1,19 +1,13 @@
 <resources>
     <string name="app_name">Умная копилка</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="menu_big_header">Умная копилка</string>
     <string name="menu_small_header">Забудь про устный счёт</string>
-
     <string name="menu_current">Копилка</string>
     <string name="menu_stats">Статистика</string>
     <string name="menu_settings">Настройки</string>
-
     <string name = "no_money">Пока 0 рублей</string>
     <string name = "money_text">%1$d рублей!</string>
-
     <string name="banner_ad_unit_id">ca-app-pub-2156340139005509/3523101475</string>
-
 </resources>
