@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity
     ProgressDialogFragment dialogFragment;
     HomeFragment homeFragment;
     StatsFragment statsFragment;
+    SettingsFragment settingsFragment;
 
     private int menuPosition = 0;
 
@@ -71,9 +72,11 @@ public class MainActivity extends AppCompatActivity
 
         homeFragment = new HomeFragment();
         statsFragment = new StatsFragment();
+        settingsFragment = new SettingsFragment();
 
         homeFragment.setRetainInstance(true);
         statsFragment.setRetainInstance(true);
+        settingsFragment.setRetainInstance(true);
 
         MoneyboxApplication application = (MoneyboxApplication) getApplication();
         mTracker = application.getDefaultTracker();
@@ -166,7 +169,7 @@ public class MainActivity extends AppCompatActivity
                 menuPosition = 1;
                 break;
             case R.id.nav_manage:
-                fragment = homeFragment; //TODO
+                fragment = settingsFragment;
                 menuPosition = 2;
                 Log.d("Нажатие в навигаторе", "Нажал на настройки");
 
