@@ -101,6 +101,13 @@ public class StatsFragment extends Fragment {
 
         statsRecyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
         return rootView;
+
+        //Тут типа такой обработчик кнопки, который принимает id
+        //Потом делаешь DBHelper.deleteOne(context,id);
+        //id - id который ты получил от карточки, ну тот который надо удалить
+        //context -
+        // final Context context = getActivity().getApplicationContext();
+        // - эту хуйню надо вставить перед обработчиком
     }
 
     private class ItemViewHolder extends RecyclerView.ViewHolder {

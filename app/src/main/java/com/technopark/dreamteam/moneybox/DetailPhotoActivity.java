@@ -56,9 +56,16 @@ public class DetailPhotoActivity extends AppCompatActivity {
         loadData(id);
 
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-2156340139005509/3523101475");
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        final AdView mAdView = (AdView) findViewById(R.id.adView);
+        final AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.postDelayed(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        mAdView.loadAd(adRequest);
+                    }
+                }, 1500
+        );
     }
 
     @Override
