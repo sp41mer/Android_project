@@ -6,7 +6,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.squareup.picasso.Picasso;
@@ -51,6 +54,11 @@ public class DetailPhotoActivity extends AppCompatActivity {
         photo = (ImageView) findViewById(R.id.imageDetails);
 
         loadData(id);
+
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-2156340139005509/3523101475");
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override
