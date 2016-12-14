@@ -17,6 +17,10 @@ public class MeshokView extends View {
 
     private final Paint paint = new Paint();
 
+    Activity host = (Activity) getContext();
+
+    Drawable d = ContextCompat.getDrawable(host, R.drawable.ic_money_bag);
+
 
 
     public MeshokView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -69,8 +73,6 @@ public class MeshokView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        Activity host = (Activity) getContext();
-
         final int width = getWidth();
         final int height = getHeight();
 
@@ -82,8 +84,8 @@ public class MeshokView extends View {
         paint.setARGB(255, 255, 235, 59);
         canvas.drawRect(0, height-newHeight, width, height, paint);
 
-        Drawable d = ContextCompat.getDrawable(host, R.drawable.ic_money_bag);
         d.setBounds(0, 0, width, height);
+
         d.draw(canvas);
     }
 }
