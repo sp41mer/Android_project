@@ -37,7 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-//TODO: Верстка едет при повороте
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity
     private static final String ACTION_SERVER_RESPONSE = "server_response";
     private static final String DIALOG_TAG = "waiting_dialog";
     private static final String EXTRA_ROW_ID = "newRowId";
+
+    NetWorkStatus statusReciever = new NetWorkStatus();
 
     NavigationView navigationView;
     Toolbar toolbar;
@@ -63,6 +65,8 @@ public class MainActivity extends AppCompatActivity
     Fragment currentFragment;
 
     private int menuPosition = 0;
+
+    private boolean networkActivity;
 
     public double sum = 0;
 
@@ -89,7 +93,10 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dispatchTakePictureIntent();
+                if (networkActivity)
+                    dispatchTakePictureIntent();
+                else
+                    Toast.makeText(MainActivity.this, "Internet connection required", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -108,6 +115,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onResume() {
         super.onResume();
+        statusReciever.getCurrentNetwork(this);
         Log.i("Кек", "Setting screen name: Копилка");
         mTracker.setScreenName("Image~Копилка");
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
@@ -135,6 +143,13 @@ public class MainActivity extends AppCompatActivity
 
         IntentFilter intentFilter = new IntentFilter(ACTION_SERVER_RESPONSE);
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, intentFilter);
+
+        statusReciever.registerCallback(new NetWorkCallback() {
+            @Override
+            public void callBackToActivity(boolean network) {
+                networkActivity = network;
+            }
+        });
 
     }
 
@@ -272,4 +287,9 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onDestroy();
+        statusReciever.registerCallback(null);
+    }
 }
