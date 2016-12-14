@@ -76,11 +76,12 @@ public class StatsFragment extends Fragment {
                 });
 
                 final int id = position;
+                final int db_id = (int) itemViewHolder.id;
                 itemViewHolder.delete_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        DBHelper.deleteOne(getContext(), id);
-                        DataSource.getInstance().removeItem(id);
+                        DBHelper.deleteOne(getContext(), db_id);
+                        DataSource.getInstance().removeItem(db_id);
                         statsRecyclerView.getAdapter().notifyItemRemoved(id);
                     }
                 });

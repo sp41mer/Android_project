@@ -35,94 +35,27 @@
                         android:layout_gravity="center_horizontal"
                         android:adjustViewBounds="true"
                         android:padding="5dp"
-                        android:layout_height="250dp" />
+                        android:layout_height="190dp" />
 
                     <LinearLayout
+                        android:weightSum="2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:baselineAligned="false"
                         android:orientation="horizontal"
                         android:layout_marginTop="20dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.5"
-                            android:background="@drawable/border"
-                            android:orientation="vertical">
+                        <ListView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:id="@+id/rubles_list" />
 
-                            <TextView
-                                android:id="@+id/textOneR"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="5dp"
-                                android:text="TextView"
-                                android:textAlignment="center" />
-
-                            <TextView
-                                android:id="@+id/textTwoR"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="5dp"
-                                android:text="TextView"
-                                android:textAlignment="center" />
-
-                            <TextView
-                                android:id="@+id/textFiveR"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="5dp"
-                                android:text="TextView"
-                                android:textAlignment="center" />
-
-                            <TextView
-                                android:id="@+id/textTenR"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="5dp"
-                                android:text="TextView"
-                                android:textAlignment="center" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.5"
-                            android:background="@drawable/border"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/textOneK"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="5dp"
-                                android:text="TextView"
-                                android:textAlignment="center" />
-
-                            <TextView
-                                android:id="@+id/textFiveK"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="5dp"
-                                android:text="TextView"
-                                android:textAlignment="center" />
-
-                            <TextView
-                                android:id="@+id/textTenK"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="5dp"
-                                android:text="TextView"
-                                android:textAlignment="center" />
-
-                            <TextView
-                                android:id="@+id/textFiftyK"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="5dp"
-                                android:text="TextView"
-                                android:textAlignment="center" />
-                        </LinearLayout>
+                        <ListView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:id="@+id/groshi_list" />
                     </LinearLayout>
 
                     <LinearLayout

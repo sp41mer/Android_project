@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -24,6 +26,8 @@ public class DetailPhotoActivity extends AppCompatActivity {
     TextView count, sum;
     ImageView photo;
 
+    ListView rublesListView, groshiListView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,14 +45,9 @@ public class DetailPhotoActivity extends AppCompatActivity {
         long id = getIntent().getLongExtra(EXTRA_ID, -1);
         Log.d("ID: ", String.valueOf(id));
 
-        oneR = (TextView) findViewById(R.id.textOneR);
-        twoR = (TextView) findViewById(R.id.textTwoR);
-        fiveR = (TextView) findViewById(R.id.textFiveR);
-        tenR = (TextView) findViewById(R.id.textTenR);
-        oneK = (TextView) findViewById(R.id.textOneK);
-        fiveK = (TextView) findViewById(R.id.textFiveK);
-        tenK = (TextView) findViewById(R.id.textTenK);
-        fiftyK = (TextView) findViewById(R.id.textFiftyK);
+        rublesListView = (ListView) findViewById(R.id.rubles_list);
+        groshiListView = (ListView) findViewById(R.id.groshi_list);
+
         count = (TextView) findViewById(R.id.textCount);
         sum = (TextView) findViewById(R.id.textSum);
         photo = (ImageView) findViewById(R.id.imageDetails);
@@ -86,16 +85,30 @@ public class DetailPhotoActivity extends AppCompatActivity {
     private void loadData(long id) {
         Item item = DataSource.getInstance().getItemById(id);
 
-        oneR.setText(String.valueOf(item.getOneR()));
-        twoR.setText(String.valueOf(item.getTwoR()));
-        fiveR.setText(String.valueOf(item.getFiveR()));
-        tenR.setText(String.valueOf(item.getTenR()));
-        oneK.setText(String.valueOf(item.getOneK()));
-        fiveK.setText(String.valueOf(item.getFiveK()));
-        tenK.setText(String.valueOf(item.getTenK()));
-        fiftyK.setText(String.valueOf(item.getFiftyK()));
-        count.setText(String.valueOf(item.getCount()));
+        String[] rublesArray = {String.valueOf(item.getOneR()), String.valueOf(item.getTwoR()), String.valueOf(item.getFiveR()), String.valueOf(item.getTenR())};
+        String[] groshiArray = {String.valueOf(item.getOneK()), String.valueOf(item.getFiveK()), String.valueOf(item.getTenK()), String.valueOf(item.getFiftyK())};
+
+        for (int i = 0; i < rublesArray.length; i++ ) {
+            rublesArray[i] = rublesArray[i].concat(" " + getString(R.string.rub));
+        }
+
+        for (int i = 0; i < groshiArray.length; i++ ) {
+            groshiArray[i] = groshiArray[i].concat(" " + getString(R.string.cop));
+        }
+
+
+        ArrayAdapter<String> rublesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, rublesArray);
+        ArrayAdapter<String> groshiAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, groshiArray);
+
+        rublesListView.setClickable(false);
+        groshiListView.setClickable(false);
+
+        rublesListView.setAdapter(rublesAdapter);
+        groshiListView.setAdapter(groshiAdapter);
+
+        count.setText(getString(R.string.count_coins)+ " " + String.valueOf(item.getCount()) + "  " + getString(R.string.coins));
         sum.setText(item.getSum());
+
         Picasso.with(this).load(item.getPicture()).fit().centerInside().into(photo);
     }
 }

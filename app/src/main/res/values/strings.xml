@@ -18,5 +18,9 @@
     <string name = "goal_text_view_text">Ваша цель - %1$d !</string>
 
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-2156340139005509/3523101475</string>
+    <string name="count_coins">Всего </string>
+    <string name="coins"> монет(а)</string>
+    <string name="rub"> руб</string>
+    <string name="cop"> коп</string>
 
 </resources>
