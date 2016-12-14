@@ -3,6 +3,7 @@ package com.technopark.dreamteam.moneybox;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +21,13 @@ import com.squareup.picasso.Picasso;
 public class SettingsFragment extends Fragment {
     public SettingsFragment() {}
 
+    EditText edit_text;
+    View rootView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
+        rootView = inflater.inflate(R.layout.fragment_settings, container, false);
 
         final Context context = getActivity().getApplicationContext();
 
@@ -31,7 +35,7 @@ public class SettingsFragment extends Fragment {
         long my_goal = DBHelper.readGoal(context);
         final TextView money_goal = (TextView) rootView.findViewById(R.id.goal_text);
         money_goal.setText(Long.toString(my_goal));
-        final EditText edit_text = (EditText) rootView.findViewById(R.id.goal_input);
+        edit_text = (EditText) rootView.findViewById(R.id.goal_input);
         button.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -44,5 +48,25 @@ public class SettingsFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            edit_text = (EditText) rootView.findViewById(R.id.goal_input);
+            Integer edit_text_val = savedInstanceState.getInt("edit_text_val");
+            edit_text.setText(edit_text_val);
+        }
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (outState != null) {
+            edit_text = (EditText) rootView.findViewById(R.id.goal_input);
+            outState.putInt("edit_text_val", Integer.parseInt(edit_text.getText().toString()));
+        }
     }
 }
