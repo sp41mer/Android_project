@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity
     HomeFragment homeFragment;
     StatsFragment statsFragment;
     SettingsFragment settingsFragment;
+    Fragment currentFragment;
 
     private int menuPosition = 0;
 
@@ -120,6 +121,10 @@ public class MainActivity extends AppCompatActivity
                     long id = intent.getLongExtra(EXTRA_ROW_ID, -1);
                     DBHelper.readOne(MainActivity.this, id);
 
+                    if (currentFragment instanceof HomeFragment) {
+                        ((HomeFragment) currentFragment).updateMoney();
+                    }
+
                     Dialog dialog = dialogFragment.getDialog();
                     if (dialog != null) {
                         dialog.cancel();
@@ -155,28 +160,27 @@ public class MainActivity extends AppCompatActivity
 
         android.support.v4.app.FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();
-        Fragment fragment = null;
 
         switch (item.getItemId()) {
             case R.id.nav_home:
                 Log.d("Нажатие в навигаторе", "Нажал на копилку");
-                fragment = homeFragment;
+                currentFragment = homeFragment;
                 menuPosition = 0;
                 break;
             case R.id.nav_stat:
                 Log.d("Нажатие в навигаторе", "Нажал на статистику");
-                fragment = statsFragment;
+                currentFragment = statsFragment;
                 menuPosition = 1;
                 break;
             case R.id.nav_manage:
-                fragment = settingsFragment;
+                currentFragment = settingsFragment;
                 menuPosition = 2;
                 Log.d("Нажатие в навигаторе", "Нажал на настройки");
 
                 break;
         }
 
-        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.replace(R.id.fragment_container, currentFragment);
         fragmentTransaction.commitAllowingStateLoss();
 
         ((DrawerLayout)findViewById(R.id.drawer_layout)).closeDrawer(GravityCompat.START);

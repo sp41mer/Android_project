@@ -2,10 +2,10 @@ package com.technopark.dreamteam.moneybox;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
@@ -75,6 +75,16 @@ public class StatsFragment extends Fragment {
                     }
                 });
 
+                final int id = position;
+                itemViewHolder.delete_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        DBHelper.deleteOne(getContext(), id);
+                        DataSource.getInstance().removeItem(id);
+                        statsRecyclerView.getAdapter().notifyItemRemoved(id);
+                    }
+                });
+
                 Item item = dataSource.getItem(position);
                 itemViewHolder.bind(item);
             }
@@ -101,23 +111,17 @@ public class StatsFragment extends Fragment {
 
         statsRecyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
         return rootView;
-
-        //Тут типа такой обработчик кнопки, который принимает id
-        //Потом делаешь DBHelper.deleteOne(context,id);
-        //id - id который ты получил от карточки, ну тот который надо удалить
-        //context -
-        // final Context context = getActivity().getApplicationContext();
-        // - эту хуйню надо вставить перед обработчиком
     }
 
     private class ItemViewHolder extends RecyclerView.ViewHolder {
 
         long id;
 
-        LinearLayout linearLayout;
+        final LinearLayout linearLayout;
         private final TextView text1;
         private final TextView text2;
         private final ImageView picture;
+        final ImageView delete_button;
 
         ItemViewHolder(final View itemView) {
             super(itemView);
@@ -126,6 +130,7 @@ public class StatsFragment extends Fragment {
             this.text1 = (TextView) itemView.findViewById(R.id.card_text_1);
             this.text2 = (TextView) itemView.findViewById(R.id.card_text_2);
             this.picture = (ImageView) itemView.findViewById(R.id.card_image);
+            this.delete_button = (ImageView) itemView.findViewById(R.id.delete_button_id);
         }
 
         void bind(Item item) {

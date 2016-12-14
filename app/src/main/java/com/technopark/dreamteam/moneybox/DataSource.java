@@ -68,6 +68,10 @@ class DataSource {
         items.remove(item);
     }
 
+    void removeItem(int id) {
+        items.remove(getItem(id));
+    }
+
     static void readData(Cursor cursor) {
         while (!cursor.isLast()) {
             cursor.moveToNext();

@@ -14,17 +14,23 @@ import com.squareup.picasso.Picasso;
 public class HomeFragment extends Fragment {
 
     public HomeFragment() {}
-
+    View rootView;
     double sum = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        return rootView;
+    }
 
-//        ImageView moneybox = (ImageView) rootView.findViewById(R.id.picture);
-//        Picasso.with(getContext()).load(R.drawable.ic_money_bag).fit().into(moneybox);
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.updateMoney();
+    }
 
+    public void updateMoney() {
         Context context = getActivity().getApplicationContext();
 
         sum = DBHelper.calculateSum(context);
@@ -39,9 +45,5 @@ public class HomeFragment extends Fragment {
         }
 
         moneymessage.setText(newText);
-
-        return rootView;
     }
-
-
 }

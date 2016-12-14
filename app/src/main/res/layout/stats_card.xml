@@ -13,18 +13,21 @@
             android:tag="image_tag"
             style="@style/AppTheme.stats_card__cards__image" />
 
-        <LinearLayout
-            style="@style/AppTheme.stats_card__linear_layout__inner" >
-
-            <TextView
-                android:id="@+id/card_text_1"
-                style="@style/AppTheme.stats_card__linear_layout__inner__text_view__first"  />
+        <RelativeLayout
+            style="@style/AppTheme.stats_card__linear_layout__inner">
 
             <TextView
                 android:id="@+id/card_text_2"
                 style="@style/AppTheme.stats_card__linear_layout__inner__text_view__second" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/card_text_1"
+                style="@style/AppTheme.stats_card__linear_layout__inner__text_view__first" />
+
+            <ImageView
+                android:id="@+id/delete_button_id" style="@style/AppTheme.stats_card__delete"/>
+
+        </RelativeLayout>
     </LinearLayout>
 
 </android.support.v7.widget.CardView>
