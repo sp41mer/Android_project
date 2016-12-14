@@ -19,6 +19,9 @@
     <dimen name="size_500">500dp</dimen>
     <dimen name="size_350">350dp</dimen>
     <dimen name="size_300">300dp</dimen>
+    <dimen name="size_250">250dp</dimen>
+    <dimen name="size_200">200dp</dimen>
+    <dimen name="size_190">190dp</dimen>
     <dimen name="size_100">100dp</dimen>
     <dimen name="size_60">60dp</dimen>
     <dimen name="size_55">55dp</dimen>
@@ -29,6 +32,7 @@
     <dimen name="size_15">15dp</dimen>
     <dimen name="size_10">10dp</dimen>
     <dimen name="size_5">5dp</dimen>
+    <dimen name="size_0">0dp</dimen>
 
 
     <!--<dimen name="ten">10</dimen>-->

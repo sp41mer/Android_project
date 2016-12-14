@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme.details__relative_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="AppTheme.details__scroll_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:fillViewport">true</item>
+    </style>
+
+    <style name="AppTheme.details__linear_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">@dimen/size_5</item>
+    </style>
+
+    <style name="AppTheme.details__card__linear_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="AppTheme.details__card__image_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/size_190</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:padding">@dimen/size_5</item>
+    </style>
+
+    <style name="AppTheme.details__card__linear_layout__inner">
+        <item name="android:weightSum">2</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:baselineAligned">false</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_marginTop">@dimen/size_20</item>
+    </style>
+
+    <style name="AppTheme.details__card__linear_layout__inner__list_view">
+        <item name="android:layout_width">@dimen/size_0</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="AppTheme.details__card__linear_layout__inner__second" parent="AppTheme.details__linear_layout">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/border</item>
+    </style>
+
+    <style name="AppTheme.details__card__linear_layout__inner__text_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="AppTheme.details__ads">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
+    <!-- landscapes styles -->
+    <style name="AppTheme.land__details__card__image_view" parent="AppTheme.details__card__image_view">
+        ="200dp"
+        <item name="android:layout_marginTop">@dimen/size_250</item>
+        <item name="android:layout_height">@dimen/size_200</item>
+    </style>
+
+    <style name="AppTheme.details__land__card__linear_layout__inner">
+        <item name="android:layout_height">@dimen/size_200</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:baselineAligned">false</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_marginTop">@dimen/size_20</item>
+    </style>
+
+</resources>
