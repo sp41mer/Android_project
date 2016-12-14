@@ -22,8 +22,8 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        ImageView moneybox = (ImageView) rootView.findViewById(R.id.picture);
-        Picasso.with(getContext()).load(R.drawable.ic_money_bag).fit().into(moneybox);
+//        ImageView moneybox = (ImageView) rootView.findViewById(R.id.picture);
+//        Picasso.with(getContext()).load(R.drawable.ic_money_bag).fit().into(moneybox);
 
         Context context = getActivity().getApplicationContext();
 

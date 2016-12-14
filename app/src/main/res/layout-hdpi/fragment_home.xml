@@ -7,9 +7,8 @@
         style="@style/AppTheme.hdpi__fragment_home__scroll_view__linear_layout"
         tools:context=".HomeFragment">
 
-        <ImageView
-            android:id="@+id/picture"
-            style="@style/AppTheme.hdpi__fragment_home__scroll_view__image_view" />
+        <com.technopark.dreamteam.moneybox.MeshokView
+            style="@style/AppTheme.hdpi__fragment_home__scroll_view__image_view"/>
 
         <TextView
             android:id="@+id/money_summary_text"
