@@ -19,7 +19,7 @@ public class MeshokView extends View {
 
     Activity host = (Activity) getContext();
 
-    Drawable d = ContextCompat.getDrawable(host, R.drawable.ic_money_bag);
+    Drawable d = ContextCompat.getDrawable(host, R.drawable.ic_money_bag1);
 
 
 
