@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity
             dialogFragment.show(getFragmentManager(), DIALOG_TAG);
 
             Intent intent = new Intent(this, PhotoService.class);
-            {}            intent.putExtra(PHOTO_PARAM, mCurrentPhotoPath);
+            intent.putExtra(PHOTO_PARAM, mCurrentPhotoPath);
             startService(intent);
         }
     }
