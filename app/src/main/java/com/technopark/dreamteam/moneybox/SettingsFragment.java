@@ -3,6 +3,7 @@ package com.technopark.dreamteam.moneybox;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,16 +49,12 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        return rootView;
-    }
-
-    @Override
-    public void onActivityCreated(final Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null) {
+        if(savedInstanceState != null){
             String edit_text_val = savedInstanceState.getString("edit_text_val");
-            edit_text.setText(edit_text_val);
+            money_goal.setText(edit_text_val);
         }
+
+        return rootView;
     }
 
     @Override
