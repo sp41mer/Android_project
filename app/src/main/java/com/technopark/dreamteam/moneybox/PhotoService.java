@@ -89,27 +89,24 @@ public class PhotoService extends Service {
             byte[] fileBytes = new byte[(int) file.length()];
             file.readFully(fileBytes);
             String baseFile = Base64.encodeToString(fileBytes, Base64.DEFAULT);
-            //String response = post("URL", makeJSON(baseFile)); //TODO
-
-            Random r = new Random();
+            String response = post("http://95.30.251.238:5000/sendphoto", makeJSON(baseFile)); //TODO
 
             ContentValues values = new ContentValues();
-            values.put("oneR", r.nextInt(5));
-            values.put("twoR", r.nextInt(5));
-            values.put("fiveR", r.nextInt(5));
-            values.put("tenR", r.nextInt(5));
-            values.put("oneK", r.nextInt(5));
-            values.put("fiveK", r.nextInt(5));
-            values.put("tenK", r.nextInt(5));
-            values.put("fiftyK", r.nextInt(5));
-            values.put("picture", photoPath);
-            long id = DBHelper.getInstance(this).getWritableDatabase().insert("Data", null, values);
 
             try {
-                Thread.sleep(3000);
-            } catch (Exception e) {
-                return;
-            }
+                JSONObject jsonObject = new JSONObject(response);
+
+                values.put("oneR", jsonObject.getInt("oneR"));
+                values.put("twoR", jsonObject.getInt("twoR"));
+                values.put("fiveR", jsonObject.getInt("fiveR"));
+                values.put("tenR", jsonObject.getInt("tenR"));
+                values.put("fiveK", jsonObject.getInt("fiveK"));
+                values.put("tenK", jsonObject.getInt("tenK"));
+                values.put("fiftyK", jsonObject.getInt("fiftyK"));
+                values.put("picture", photoPath);
+            } catch (JSONException ignored) {}
+
+            long id = DBHelper.getInstance(this).getWritableDatabase().insert("Data", null, values);
 
             Intent intent = new Intent(ACTION_SERVER_RESPONSE);
             intent.putExtra(EXTRA_ROW_ID, id);
