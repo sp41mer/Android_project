@@ -146,7 +146,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingTop">@dimen/nav_header_vertical_spacing</item>
-        <item name="android:src">@android:drawable/sym_def_app_icon</item>
+        <item name="android:src">@drawable/icon</item>
     </style>
 
     <style name="AppTheme.nav_header_main__text_view__first">

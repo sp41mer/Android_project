@@ -287,9 +287,9 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    protected void onStop() {
-        super.onDestroy();
-        statusReciever.registerCallback(null);
-    }
+//    @Override
+//    protected void onStop() {
+//        super.onDestroy();
+//        statusReciever.registerCallback(null);
+//    }
 }
