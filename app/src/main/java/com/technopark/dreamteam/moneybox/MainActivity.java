@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onResume() {
         super.onResume();
-        statusReciever.getCurrentNetwork(this);
+        networkActivity = statusReciever.getCurrentNetwork(this);
         Log.i("Кек", "Setting screen name: Копилка");
         mTracker.setScreenName("Image~Копилка");
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
