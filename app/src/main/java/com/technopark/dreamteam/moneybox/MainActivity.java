@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity
                 if (networkActivity)
                     dispatchTakePictureIntent();
                 else
-                    Toast.makeText(MainActivity.this, R.string.required_connection, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Internet connection required", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -287,9 +287,9 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-//    @Override
-//    protected void onStop() {
-//        super.onDestroy();
-//        statusReciever.registerCallback(null);
-//    }
+    @Override
+    protected void onStop() {
+        super.onDestroy();
+        statusReciever.registerCallback(null);
+    }
 }
