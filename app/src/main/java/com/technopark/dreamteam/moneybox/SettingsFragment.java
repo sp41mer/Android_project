@@ -2,6 +2,7 @@ package com.technopark.dreamteam.moneybox;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -51,22 +52,17 @@ public class SettingsFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
-            edit_text = (EditText) rootView.findViewById(R.id.goal_input);
-            Integer edit_text_val = savedInstanceState.getInt("edit_text_val");
+            String edit_text_val = savedInstanceState.getString("edit_text_val");
             edit_text.setText(edit_text_val);
         }
-
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (outState != null) {
-            edit_text = (EditText) rootView.findViewById(R.id.goal_input);
-            outState.putInt("edit_text_val", Integer.parseInt(edit_text.getText().toString()));
-        }
+        outState.putString("edit_text_val", String.valueOf(edit_text.getText()));
     }
 }
