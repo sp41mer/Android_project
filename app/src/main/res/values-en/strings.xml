@@ -15,4 +15,5 @@
     <string name="cop"> cop </string>
     <string name="count_coins">About </string>
     <string name="rub"> rub</string>
+    <string name="required_connection">Internet connection required</string>
 </resources>

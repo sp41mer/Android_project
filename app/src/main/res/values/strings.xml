@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Умная копилка</string>
 
+    <string name = "required_connection"> Требуется подключение к интернету</string>
+
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 
