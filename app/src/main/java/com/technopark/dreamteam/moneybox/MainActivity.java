@@ -286,4 +286,10 @@ public class MainActivity extends AppCompatActivity
             startService(intent);
         }
     }
+
+    @Override
+    protected void onStop() {
+        super.onDestroy();
+        statusReciever.registerCallback(null);
+    }
 }
