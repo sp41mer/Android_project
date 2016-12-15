@@ -23,16 +23,8 @@ public class NetWorkStatus extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, final Intent intent) {
 
-        int status = getConnectivityStatus(context);
-        boolean network = false;
-        switch (status) {
-            case TYPE_WIFI:
-            case TYPE_MOBILE:
-                network = true;
-            case TYPE_NOT_CONNECTED:
-                network = false;
-        }
-        callback.callBackToActivity(network);
+        if (callback != null)
+            callback.callBackToActivity(getCurrentNetwork(context));
     }
 
     public static int getConnectivityStatus(Context context) {
@@ -63,8 +55,10 @@ public class NetWorkStatus extends BroadcastReceiver {
             case TYPE_WIFI:
             case TYPE_MOBILE:
                 network = true;
+                break;
             case TYPE_NOT_CONNECTED:
                 network = false;
+                break;
         }
         return network;
     }

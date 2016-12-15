@@ -158,6 +158,7 @@ public class MainActivity extends AppCompatActivity
         super.onPause();
 
         LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
+        statusReciever.registerCallback(null);
     }
 
     @Override
@@ -285,11 +286,5 @@ public class MainActivity extends AppCompatActivity
             intent.putExtra(PHOTO_PARAM, mCurrentPhotoPath);
             startService(intent);
         }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onDestroy();
-        statusReciever.registerCallback(null);
     }
 }
