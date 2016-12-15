@@ -75,19 +75,18 @@ public class StatsFragment extends Fragment {
                     }
                 });
 
-                final int id = position;
-                final int db_id = (int) itemViewHolder.id;
+                final Item item = dataSource.getItem(position);
+                itemViewHolder.bind(item);
+
+                final int id = (int)item.getId();
                 itemViewHolder.delete_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        DBHelper.deleteOne(getContext(), db_id);
-                        DataSource.getInstance().removeItem(db_id);
-                        statsRecyclerView.getAdapter().notifyItemRemoved(id);
+                        DBHelper.deleteOne(getContext(), id);
+                        DataSource.getInstance().removeItem(id - 1);
+                        statsRecyclerView.getAdapter().notifyItemRemoved(id - 1);
                     }
                 });
-
-                Item item = dataSource.getItem(position);
-                itemViewHolder.bind(item);
             }
 
             @Override

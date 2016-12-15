@@ -89,11 +89,37 @@ public class DetailPhotoActivity extends AppCompatActivity {
         String[] groshiArray = {String.valueOf(item.getOneK()), String.valueOf(item.getFiveK()), String.valueOf(item.getTenK()), String.valueOf(item.getFiftyK())};
 
         for (int i = 0; i < rublesArray.length; i++ ) {
-            rublesArray[i] = rublesArray[i].concat(" " + getString(R.string.rub));
+            switch (i) {
+                case (0):
+                    rublesArray[i] = rublesArray[i].concat(" " + " (1 рубль) ");
+                    break;
+                case (1):
+                    rublesArray[i] = rublesArray[i].concat(" "+ " (2 рубля) ");
+                    break;
+                case (2):
+                    rublesArray[i] = rublesArray[i].concat(" "+ " (5 рублей) ");
+                    break;
+                case (3):
+                    rublesArray[i] = rublesArray[i].concat(" " + " (10 рублей) ");
+                    break;
+            }
         }
 
         for (int i = 0; i < groshiArray.length; i++ ) {
-            groshiArray[i] = groshiArray[i].concat(" " + getString(R.string.cop));
+            switch (i) {
+                case (0):
+                    groshiArray[i] = groshiArray[i].concat(" " + " (1 копейка) " );
+                    break;
+                case (1):
+                    groshiArray[i] = groshiArray[i].concat(" " + " (5 копеек) " );
+                    break;
+                case (2):
+                    groshiArray[i] = groshiArray[i].concat(" " + " (10 копеек) ");
+                    break;
+                case (3):
+                    groshiArray[i] = groshiArray[i].concat(" " + " (50 копеек) ");
+                    break;
+            }
         }
 
 
