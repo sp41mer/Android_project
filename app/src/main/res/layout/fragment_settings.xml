@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/AppTheme.fragment_settings__linear_layout">
+
+    <ScrollView style="@style/AppTheme.fragment_settings__scroll_view">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            style="@style/AppTheme.fragment_settings__linear_layout__linear_layout"
+            tools:context=".DetailPhotoActivity">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view"
+                style="@style/AppTheme.fragment_settings__card">
+
+                <LinearLayout style="@style/AppTheme.fragment_settings__card__linear_layout">
+
+                    <EditText
+                        android:id="@+id/goal_input"
+                        style="@style/AppTheme.fragment_settings__card__linear_layout__edit_text"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/goal_text"
+                        style="@style/AppTheme.fragment_settings__card__linear_layout__text_view__first"/>
+
+                    <Button
+                        android:id="@+id/goal_button"
+                        style="@style/AppTheme.fragment_settings__card__linear_layout__text_view__second"/>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

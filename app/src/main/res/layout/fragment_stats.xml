@@ -1,19 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.sp41mer.android_project.StatsFragment">
+    style="@style/AppTheme.fragment_stats__relative_layout"
+    tools:context=".StatsFragment">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="STATS"
-        android:padding="8dp"
-        android:textColor="#fff"
-        android:background="@color/colorPrimary"
-        android:textSize="28sp"
-        android:id="@+id/stats_button"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_photos"
+        style="@style/AppTheme.fragment_stats__recycler_view" >
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
