@@ -101,7 +101,7 @@ class DBHelper extends SQLiteOpenHelper {
     static double calculateSum(Context context){
         SQLiteDatabase database = getInstance(context).getReadableDatabase();
 
-        Cursor cursor = database.rawQuery("SELECT SUM((oneR+twoR+fiveR+tenR+(oneK+fiveK+tenK+fiftyK)/100.)) FROM Data", null);
+        Cursor cursor = database.rawQuery("SELECT SUM((oneR+twoR*2+fiveR*5+tenR*10)+(oneK+fiveK*5+tenK*10+fiftyK*50)/100.) FROM Data", null);
         if (cursor.getCount() == 0) {
             cursor.close();
             return -1;

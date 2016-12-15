@@ -3,6 +3,7 @@ package com.technopark.dreamteam.moneybox;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
@@ -16,11 +17,11 @@ import android.view.View;
 public class MeshokView extends View {
 
     private final Paint paint = new Paint();
+    private final Paint p = new Paint();
 
     Activity host = (Activity) getContext();
 
     Drawable d = ContextCompat.getDrawable(host, R.drawable.ic_money_bag);
-
 
 
     public MeshokView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -76,7 +77,7 @@ public class MeshokView extends View {
         final int width = getWidth();
         final int height = getHeight();
 
-        float sum = (float) DBHelper.calculateSum(host);
+        float sum = (float) DataSource.getInstance().calculateSum();
         long goal = DBHelper.readGoal(host);
 
         int newHeight = (int)(height * sum / goal);
@@ -87,5 +88,10 @@ public class MeshokView extends View {
         d.setBounds(0, 0, width, height);
 
         d.draw(canvas);
+
+        p.setColor( Color.BLACK );
+        p.setStrokeWidth( 1.5f );
+        p.setStyle( Paint.Style.STROKE );
+        canvas.drawRect(0, 0, width, height, p);
     }
 }

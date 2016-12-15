@@ -51,7 +51,7 @@ public class SettingsFragment extends Fragment {
 
         if(savedInstanceState != null){
             String edit_text_val = savedInstanceState.getString("edit_text_val");
-            money_goal.setText(edit_text_val);
+            edit_text.setText(edit_text_val);
         }
 
         return rootView;

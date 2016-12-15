@@ -45,8 +45,8 @@ class Item {
         return oneR + twoR + fiveR + tenR + oneK + fiveK + tenK + fiftyK;
     }
 
-    String getSum() {
-        return String.format(Locale.getDefault(), "%.2f", (oneR + twoR + fiveR + tenR) + (oneK + fiveK + tenK + fiftyK) / 100.) + " руб.";
+    double getSum() {
+        return (oneR + twoR * 2 + fiveR * 5 + tenR * 10) + (oneK + fiveK * 5 + tenK * 10 + fiftyK * 50) / 100.;
     }
 
     String getPicture() {

@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
     public void updateMoney() {
         Context context = getActivity().getApplicationContext();
 
-        sum = DBHelper.calculateSum(context);
+        sum = DataSource.getInstance().calculateSum();
         int moneys = (int) sum;
 
         TextView moneymessage = (TextView) rootView.findViewById(R.id.money_summary_text);

@@ -262,6 +262,7 @@ public class MainActivity extends AppCompatActivity
         outState.putInt(MENU_POSITION_PARAM, menuPosition);
         try {
             getSupportFragmentManager().putFragment(outState, "stats", statsFragment);
+            getSupportFragmentManager().putFragment(outState, "settings", settingsFragment);
         } catch (IllegalStateException | NullPointerException ignored) {}
     }
 
@@ -269,10 +270,14 @@ public class MainActivity extends AppCompatActivity
         super.onRestoreInstanceState(savedInstanceState);
         mCurrentPhotoPath = savedInstanceState.getString(PHOTO_PARAM);
         menuPosition = savedInstanceState.getInt(MENU_POSITION_PARAM);
-        Fragment fragment = getSupportFragmentManager().getFragment(savedInstanceState, "stats");
-        if (fragment != null)
-            statsFragment = (StatsFragment) fragment;
-
+        Fragment fragmentstat = getSupportFragmentManager().getFragment(savedInstanceState, "stats");
+        if (fragmentstat != null) {
+            statsFragment = (StatsFragment) fragmentstat;
+        }
+        Fragment fragmentsett = getSupportFragmentManager().getFragment(savedInstanceState, "settings");
+        if (fragmentsett != null) {
+            settingsFragment = (SettingsFragment) fragmentsett;
+        }
         dialogFragment = (ProgressDialogFragment) getFragmentManager().findFragmentByTag(DIALOG_TAG);
     }
 

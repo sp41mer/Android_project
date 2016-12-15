@@ -20,6 +20,7 @@ import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -47,7 +48,7 @@ public class PhotoService extends Service {
         super.onCreate();
 
         executorService = Executors.newSingleThreadExecutor();
-        client = new OkHttpClient();
+        client = new OkHttpClient.Builder().readTimeout(60, TimeUnit.SECONDS).build();
     }
 
     @Override

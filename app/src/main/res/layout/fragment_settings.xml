@@ -19,7 +19,8 @@
 
                     <EditText
                         android:id="@+id/goal_input"
-                        style="@style/AppTheme.fragment_settings__card__linear_layout__edit_text"/>
+                        style="@style/AppTheme.fragment_settings__card__linear_layout__edit_text"
+                        android:textAlignment="center" />
 
                     <TextView
                         android:id="@+id/goal_text"

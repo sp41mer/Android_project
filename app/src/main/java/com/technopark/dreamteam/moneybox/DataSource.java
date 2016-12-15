@@ -102,4 +102,12 @@ class DataSource {
             dataSource.addItem(0, item);
         }
     }
+
+    double calculateSum() {
+        double sum = 0.;
+        for (Item i : items) {
+            sum += i.getSum();
+        }
+        return sum;
+    }
 }

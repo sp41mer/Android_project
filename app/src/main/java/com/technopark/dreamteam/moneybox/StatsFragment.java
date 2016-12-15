@@ -136,7 +136,7 @@ public class StatsFragment extends Fragment {
         void bind(Item item) {
             id = item.getId();
 
-            text1.setText(String.valueOf(item.getSum()));
+            text1.setText(String.format("%.2f руб.", item.getSum()));
             text2.setText(item.getDate());
             picasso.load(item.getPicture()).fit().centerInside().into(picture);
         }

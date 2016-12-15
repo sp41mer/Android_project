@@ -133,7 +133,7 @@ public class DetailPhotoActivity extends AppCompatActivity {
         groshiListView.setAdapter(groshiAdapter);
 
         count.setText(getString(R.string.count_coins)+ " " + String.valueOf(item.getCount()) + "  " + getString(R.string.coins));
-        sum.setText(item.getSum());
+        sum.setText(String.format("%.2f руб.", item.getSum()));
 
         Picasso.with(this).load(item.getPicture()).fit().centerInside().into(photo);
     }
